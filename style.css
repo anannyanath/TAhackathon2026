@@ -1,0 +1,107 @@
+/* Tiger Analytics | Sense & Respond - Custom Stylesheet */
+
+:root {
+    --primary-orange: #f48221;
+    --sidebar-bg: #fdf8f4;
+    --card-bg: #ffffff;
+    --main-bg: #f5f5f5;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-color: #eeeeee;
+}
+
+/* Base Reset & Typography */
+html, body, [class*="css"] {
+    font-family: 'Inter', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-main);
+}
+
+/* Header & Sidebar Specifics */
+header[data-testid="stHeader"] { 
+    background-color: var(--primary-orange); 
+    height: 50px;
+}
+
+[data-testid="stSidebar"] { 
+    background-color: var(--sidebar-bg) !important; 
+    border-right: 1px solid var(--border-color); 
+}
+
+[data-testid="stAppViewContainer"] { 
+    background-color: var(--main-bg); 
+}
+
+/* Heading Hierarchies */
+h1 { 
+    font-size: 2rem !important; 
+    font-weight: 700 !important; 
+    color: var(--text-main) !important; 
+    margin-bottom: 0.5rem !important;
+}
+
+h2 { 
+    font-size: 1.2rem !important; 
+    font-weight: 600 !important; 
+    color: var(--text-main) !important; 
+    margin-top: 1rem !important; 
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 0.5rem;
+}
+
+h3 { 
+    font-size: 0.85rem !important; 
+    font-weight: 700 !important; 
+    color: var(--text-muted) !important; 
+    margin-bottom: 0.5rem !important; 
+}
+
+/* Component Cards */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    border: 1px solid var(--border-color) !important; 
+    border-radius: 12px !important; 
+    background: var(--card-bg) !important; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+    height: 100% !important;
+}
+
+/* Button & UI Interactions */
+.stButton>button {
+    background-color: var(--card-bg) !important; 
+    color: var(--text-main) !important; 
+    border: 1px solid var(--primary-orange) !important; 
+    border-radius: 8px !important;
+    font-weight: 600 !important; 
+    padding: 0.5rem 1rem !important;
+}
+
+.stButton>button:hover { 
+    background-color: var(--primary-orange) !important; 
+    color: #FFFFFF !important; 
+}
+
+.stProgress > div > div > div > div { 
+    background-color: var(--primary-orange) !important; 
+    height: 8px !important; 
+}
+
+/* Chat & Messaging Layouts */
+.stChatMessage { 
+    background-color: #FFFFFF !important; 
+    border: 1px solid var(--border-color) !important; 
+    border-radius: 8px !important; 
+}
+
+.chat-panel { 
+    background: #f9f9f9; 
+    padding: 20px; 
+    border-radius: 12px; 
+    border: 1px solid var(--border-color); 
+    height: 100%;
+}
+
+.block-container { 
+    padding-top: 1rem; 
+    padding-bottom: 2rem; 
+    max-width: 1600px; 
+}

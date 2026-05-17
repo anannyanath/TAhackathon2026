@@ -1,0 +1,32 @@
+{
+    "personas": {
+      "Creative Designer (Ops)": {
+        "kpis": [
+          {"label": "Aesthetic Alignment", "target": "85%+", "metric_key": "alignment_score"},
+          {"label": "Style Velocity", "target": "12 assets/wk", "metric_key": "velocity"},
+          {"label": "Trend Match Rate", "target": "High", "metric_key": "trend_match"}
+        ]
+      },
+      "Marketing Professional (Ops)": {
+        "kpis": [
+          {"label": "Campaign Reach", "target": "2.4M", "metric_key": "reach"},
+          {"label": "Ad Sentiment", "target": "Positive", "metric_key": "sentiment"},
+          {"label": "Conversion Delta", "target": "+3.2%", "metric_key": "conv_delta"}
+        ]
+      },
+      "Supply Chain Manager (Ops)": {
+        "kpis": [
+          {"label": "OTIF (On-Time)", "target": "98%", "metric_key": "otif"},
+          {"label": "Lead Time Variance", "target": "<2 Days", "metric_key": "ltv"},
+          {"label": "Carbon Intensity", "target": "Reduced", "metric_key": "carbon"}
+        ]
+      },
+      "Analyst / Data Scientist (Analytical)": {
+        "kpis": [
+          {"label": "Model Drift", "target": "<5%", "metric_key": "drift"},
+          {"label": "Inference Latency", "target": "200ms", "metric_key": "latency"},
+          {"label": "Data Integrity Score", "target": "99.9%", "metric_key": "integrity"}
+        ]
+      }
+    }
+  }
