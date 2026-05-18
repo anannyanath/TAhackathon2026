@@ -1,0 +1,300 @@
+Persona,Primary Layer,Secondary Layer,Layer Display,Industry Context
+Actuary,Analytical,Technical,Analytical / Technical,", Healthcare & Life Sciences"
+Assortment Planner,Analytical,Operational,Analytical / Operational,Retail
+Audience Analyst,Analytical,—,Analytical,
+Audience Development Manager,Analytical,Operational,Analytical / Operational,
+Billing Analyst,Analytical,Operational,Analytical / Operational,
+Capacity Planner,Analytical,Technical,Analytical / Technical,
+Churn Analyst,Analytical,—,Analytical,
+Compliance Analyst,Analytical,Governance,Analytical / Governance,
+Consumer Insights Analyst,Analytical,—,Analytical,
+Consumer Insights Manager,Analytical,Strategic,Analytical / Strategic,
+Content Analytics Manager,Analytical,Technical,Analytical / Technical,
+Cost Analyst,Analytical,—,Analytical,
+Credit Analyst,Analytical,Governance,Analytical / Governance,", Banking & Financial Services"
+Credit Risk Analyst,Analytical,Governance,Analytical / Governance,
+Customer Journey Analyst,Analytical,—,Analytical,
+Customer Rate Analyst,Analytical,Governance,Analytical / Governance,
+Data Analyst,Analytical,—,Analytical,
+Demand Planner,Analytical,Operational,Analytical / Operational,
+Energy Yield Analyst,Analytical,Technical,Analytical / Technical,
+Equity Research Analyst,Analytical,—,Analytical,
+FinOps Manager,Analytical,Technical,Analytical / Technical,
+Fraud & Risk Manager,Analytical,Governance,Analytical / Governance,
+Fraud Analyst,Analytical,Governance,Analytical / Governance,
+GRC Analyst,Analytical,Governance,Analytical / Governance,
+Game Analyst,Analytical,Technical,Analytical / Technical,
+Grid Data Analyst,Analytical,Technical,Analytical / Technical,
+Inventory Accuracy Manager,Analytical,Operational,Analytical / Operational,
+Inventory Planner,Analytical,Operational,Analytical / Operational,
+Inventory Visibility Analyst,Analytical,—,Analytical,
+Investment Banker (Analyst/Associate),Analytical,Strategic,Analytical / Strategic,Banking & Financial Services
+Labor Planner,Analytical,Operational,Analytical / Operational,
+Loss Prevention Analyst,Analytical,Governance,Analytical / Governance,
+M&A Associate,Analytical,Strategic,Analytical / Strategic,
+Monetisation Manager,Analytical,Strategic,Analytical / Strategic,
+Network Design Analyst,Analytical,Strategic,Analytical / Strategic,
+Population Health Analyst,Analytical,Technical,Analytical / Technical,
+Portfolio Manager,Analytical,Strategic,Analytical / Strategic,", Banking & Financial Services"
+Post-Market Surveillance Analyst,Analytical,Governance,Analytical / Governance,
+Predictive Maintenance Analyst,Analytical,Technical,Analytical / Technical,
+Pricing Analyst,Analytical,—,Analytical,
+Pricing Manager,Analytical,Operational,Analytical / Operational,
+Replenishment Analyst,Analytical,—,Analytical,
+Retention Analyst,Analytical,—,Analytical,
+Revenue Assurance Manager,Analytical,Governance,Analytical / Governance,
+Risk Profiling Analyst,Analytical,Governance,Analytical / Governance,
+Route Optimization Analyst,Analytical,Technical,Analytical / Technical,
+Sales Force Analyst,Analytical,—,Analytical,
+Space Planner,Analytical,Operational,Analytical / Operational,
+Sports Analyst,Analytical,—,Analytical,
+Supply Network Planner,Analytical,Operational,Analytical / Operational,
+Threat Intelligence Analyst,Analytical,Technical,Analytical / Technical,Technology & SaaS
+Trading Analyst,Analytical,Strategic,Analytical / Strategic,
+Trust & Safety Analyst,Analytical,Governance,Analytical / Governance,
+UA Manager,Analytical,Operational,Analytical / Operational,
+Underwriter,Analytical,Governance,Analytical / Governance,Banking & Financial Services
+Urban Logistics Planner,Analytical,Strategic,Analytical / Strategic,
+Utilization Management Analyst,Analytical,Governance,Analytical / Governance,
+Yield Analyst,Analytical,Technical,Analytical / Technical,
+Beauty Advisor,Frontline,—,Frontline,
+CX Specialist,Frontline,—,Frontline,
+Client Relationship Manager,Frontline,Operational,Frontline / Operational,
+Clienteling Specialist,Frontline,—,Frontline,
+Community Manager,Frontline,Operational,Frontline / Operational,
+Customer Applications Engineer,Frontline,Technical,Frontline / Technical,
+Customer Enablement Manager,Frontline,Operational,Frontline / Operational,
+Customer Service Manager,Frontline,Operational,Frontline / Operational,
+Customer Success Manager,Frontline,Operational,Frontline / Operational,
+Developer Relations Engineer,Frontline,Technical,Frontline / Technical,
+Device Sales Manager,Frontline,Operational,Frontline / Operational,
+Field Service Manager,Frontline,Technical,Frontline / Technical,
+Financial Advisor,Frontline,Strategic,Frontline / Strategic,
+Interior Design Consultant,Frontline,Technical,Frontline / Technical,
+Medical Science Liaison,Frontline,Technical,Frontline / Technical,
+Merchant Success Manager,Frontline,Operational,Frontline / Operational,
+Pharmacist Liaison,Frontline,Technical,Frontline / Technical,
+Relationship Manager,Frontline,Strategic,Frontline / Strategic,
+Sales Engineer,Frontline,Technical,Frontline / Technical,
+Wealth Planner,Frontline,Analytical,Frontline / Analytical,
+AI Ethics Analyst,Governance,Analytical,Governance / Analytical,
+Compliance Manager,Governance,—,Governance,
+Compliance Officer,Governance,—,Governance,
+Contract Manager,Governance,Operational,Governance / Operational,
+Customs Compliance Manager,Governance,Operational,Governance / Operational,
+EHS Manager,Governance,Technical,Governance / Technical,
+Government Relations Manager,Governance,Strategic,Governance / Strategic,
+HSE Manager,Governance,Technical,Governance / Technical,
+IP Manager,Governance,Technical,Governance / Technical,
+Quality & Safety Officer,Governance,Technical,Governance / Technical,
+Regulatory Affairs Manager,Governance,Strategic,Governance / Strategic,", CPG"
+Regulatory Manager,Governance,—,Governance,
+Rights Manager,Governance,Operational,Governance / Operational,", Media & Entertainment"
+Spectrum Manager,Governance,Technical,Governance / Technical,
+Sustainability Manager,Governance,Strategic,Governance / Strategic,
+Trust & Safety Manager,Governance,Operational,Governance / Operational,
+Ad Sales Manager,Operational,Frontline,Operational / Frontline,
+After-Sales Manager,Operational,Frontline,Operational / Frontline,
+Agent Network Manager,Operational,Strategic,Operational / Strategic,
+Asset Operations Manager,Operational,Technical,Operational / Technical,Energy & Utilities
+Assortment Manager,Operational,Analytical,Operational / Analytical,Retail
+BOPIS Manager,Operational,Frontline,Operational / Frontline,
+Billing Manager,Operational,Analytical,Operational / Analytical,
+Branch Manager,Operational,Frontline,Operational / Frontline,
+Broker Manager,Operational,Frontline,Operational / Frontline,
+CRM Manager,Operational,Analytical,Operational / Analytical,
+CRM/Loyalty Manager,Operational,Analytical,Operational / Analytical,
+Capital Markets Manager,Operational,Strategic,Operational / Strategic,
+Category Manager,Operational,Strategic,Operational / Strategic,", Retail"
+Category Specialist,Operational,Analytical,Operational / Analytical,Retail
+Channel Manager,Operational,Strategic,Operational / Strategic,
+Channel Marketing Manager,Operational,Strategic,Operational / Strategic,
+Claims Manager,Operational,Governance,Operational / Governance,
+Client Relations Manager,Operational,Frontline,Operational / Frontline,Retail
+Clinical Operations Manager,Operational,Technical,Operational / Technical,Healthcare & Life Sciences
+Clinical Trial Manager,Operational,Technical,Operational / Technical,Healthcare & Life Sciences
+Commercial Manager,Operational,Strategic,Operational / Strategic,
+Commercial Operations Manager,Operational,Strategic,Operational / Strategic,
+Commercial Sales Manager,Operational,Strategic,Operational / Strategic,
+Concession Manager,Operational,—,Operational,
+Contract Manufacturing Manager,Operational,Technical,Operational / Technical,
+Customer Acquisition Manager,Operational,Frontline,Operational / Frontline,
+Customer Communication Manager,Operational,Frontline,Operational / Frontline,
+Customer Engagement Manager,Operational,Frontline,Operational / Frontline,
+Customer Experience Manager,Operational,Frontline,Operational / Frontline,
+Dealer Operations Manager,Operational,Frontline,Operational / Frontline,
+Delivery Operations Manager,Operational,—,Operational,
+Demand Response Manager,Operational,Technical,Operational / Technical,
+Demand-Side Manager,Operational,Analytical,Operational / Analytical,
+Digital Banking Manager,Operational,Technical,Operational / Technical,
+Digital Marketing Manager,Operational,Analytical,Operational / Analytical,
+Distribution Manager,Operational,Strategic,Operational / Strategic,
+Distributor Manager,Operational,Strategic,Operational / Strategic,CPG
+Driver Experience Manager,Operational,Frontline,Operational / Frontline,
+E&P Manager,Operational,Technical,Operational / Technical,Energy & Utilities
+E-commerce Manager,Operational,Analytical,Operational / Analytical,
+Editor,Operational,Frontline,Operational / Frontline,Media & Entertainment
+Enterprise Sales Manager,Operational,Strategic,Operational / Strategic,
+Fab Operations Manager,Operational,Technical,Operational / Technical,Manufacturing
+Fan Engagement Manager,Operational,Frontline,Operational / Frontline,
+Field Operations Manager,Operational,Frontline,Operational / Frontline,
+Fleet Manager,Operational,Technical,Operational / Technical,
+Franchise Manager,Operational,Strategic,Operational / Strategic,
+Fraud & Identity Manager,Operational,Governance,Operational / Governance,
+Freight Operations Manager,Operational,Technical,Operational / Technical,Logistics & Supply Chain
+Fresh Dept. Head,Operational,Frontline,Operational / Frontline,
+Fulfillment Manager,Operational,—,Operational,
+GTM Manager,Operational,Strategic,Operational / Strategic,
+Gig Network Manager,Operational,Technical,Operational / Technical,
+Grid Operations Manager,Operational,Technical,Operational / Technical,Energy & Utilities
+Growth Manager,Operational,Analytical,Operational / Analytical,
+Growth Marketer,Operational,Analytical,Operational / Analytical,Retail
+Growth Marketing Manager,Operational,Analytical,Operational / Analytical,
+Hub Operations Manager,Operational,Frontline,Operational / Frontline,Logistics & Supply Chain
+Inbound Manager,Operational,Frontline,Operational / Frontline,Logistics & Supply Chain
+Influencer Marketing Manager,Operational,—,Operational,
+Key Account Manager,Operational,Strategic,Operational / Strategic,
+Last-Mile Operations Manager,Operational,Frontline,Operational / Frontline,", Logistics & Supply Chain"
+Live Ops Manager,Operational,Technical,Operational / Technical,Media & Entertainment
+Loyalty Manager,Operational,Analytical,Operational / Analytical,
+Loyalty Program Manager,Operational,Analytical,Operational / Analytical,
+Luxury Buyer,Operational,Strategic,Operational / Strategic,
+MRO Manager,Operational,Technical,Operational / Technical,
+Manufacturing Manager,Operational,Technical,Operational / Technical,
+Marketing Manager,Operational,Strategic,Operational / Strategic,
+Marketplace Operations Manager,Operational,Technical,Operational / Technical,Retail
+Member Experience Manager,Operational,Frontline,Operational / Frontline,
+Merchandiser,Operational,Frontline,Operational / Frontline,", Retail"
+Network Operations Manager,Operational,Technical,Operational / Technical,Telecommunications
+Network Planning Manager,Operational,Technical,Operational / Technical,Telecommunications
+Network Relations Manager,Operational,Strategic,Operational / Strategic,
+O&M Manager,Operational,Technical,Operational / Technical,
+OEM Sales Manager,Operational,Strategic,Operational / Strategic,
+Omnichannel Operations Manager,Operational,Strategic,Operational / Strategic,", Retail"
+Operations Manager,Operational,—,Operational,
+Outage Manager,Operational,Frontline,Operational / Frontline,
+Patient Experience Manager,Operational,Frontline,Operational / Frontline,
+Patient Recruitment Manager,Operational,Frontline,Operational / Frontline,
+Payments Product Manager,Operational,Strategic,Operational / Strategic,Banking & Financial Services
+Pipeline Manager,Operational,Technical,Operational / Technical,
+Procurement Manager,Operational,Strategic,Operational / Strategic,
+Product Manager,Operational,Strategic,Operational / Strategic,", Banking & Financial Services, Technology & SaaS"
+Production Manager,Operational,Technical,Operational / Technical,
+Production Planner,Operational,Analytical,Operational / Analytical,", Manufacturing"
+Programming Manager,Operational,Strategic,Operational / Strategic,Media & Entertainment
+Promotions Manager,Operational,—,Operational,
+Provider Relations Manager,Operational,Strategic,Operational / Strategic,
+Refinery Operations Manager,Operational,Technical,Operational / Technical,
+Replenishment Planner,Operational,Analytical,Operational / Analytical,
+Retail Banking Product Manager,Operational,Strategic,Operational / Strategic,", Banking & Financial Services"
+Retail Execution Manager,Operational,Frontline,Operational / Frontline,
+Retention Manager,Operational,Analytical,Operational / Analytical,
+RevOps Manager,Operational,Analytical,Operational / Analytical,
+Revenue Cycle Manager,Operational,Analytical,Operational / Analytical,
+SOC Manager,Operational,Technical,Operational / Technical,
+Sales Manager,Operational,Frontline,Operational / Frontline,
+Service Manager,Operational,Frontline,Operational / Frontline,
+Shopper Marketing Manager,Operational,Analytical,Operational / Analytical,
+Showroom Manager,Operational,Frontline,Operational / Frontline,
+Site Manager,Operational,Frontline,Operational / Frontline,
+Sourcing Manager,Operational,—,Operational,
+Sponsorship Manager,Operational,Strategic,Operational / Strategic,
+Sports Buyer,Operational,—,Operational,Retail
+Store Experience Manager,Operational,Frontline,Operational / Frontline,
+Store Manager,Operational,Frontline,Operational / Frontline,
+Store Operations Manager,Operational,Frontline,Operational / Frontline,
+Subscription Manager,Operational,Analytical,Operational / Analytical,
+Supplier Manager,Operational,—,Operational,
+Supply Chain Manager,Operational,Strategic,Operational / Strategic,
+Supply Manager,Operational,—,Operational,
+Supply Planner,Operational,Analytical,Operational / Analytical,
+Syndication Manager,Operational,Strategic,Operational / Strategic,
+Trade Finance Manager,Operational,Technical,Operational / Technical,
+Trade Lane Manager,Operational,Strategic,Operational / Strategic,
+Trade Manager,Operational,—,Operational,
+Trade Marketer,Operational,—,Operational,
+Trade Marketing Manager,Operational,Strategic,Operational / Strategic,", CPG"
+Trade Promotions Manager,Operational,Analytical,Operational / Analytical,
+Trade-In Program Manager,Operational,Analytical,Operational / Analytical,
+Transportation Manager,Operational,Technical,Operational / Technical,
+Treasury Manager,Operational,Analytical,Operational / Analytical,
+Vendor Manager,Operational,Strategic,Operational / Strategic,
+Vet Channel Manager,Operational,Technical,Operational / Technical,CPG
+Visual Merchandising Manager,Operational,Frontline,Operational / Frontline,
+Warehouse Manager,Operational,Frontline,Operational / Frontline,Logistics & Supply Chain
+Warehouse Operations Manager,Operational,—,Operational,
+Wholesale Manager,Operational,Strategic,Operational / Strategic,
+Workforce Manager,Operational,—,Operational,
+Workforce Scheduler,Operational,Analytical,Operational / Analytical,
+AI Product Manager,Strategic,Technical,Strategic / Technical,
+Brand Manager,Strategic,Operational,Strategic / Operational,", CPG"
+Brand Marketing Manager,Strategic,Operational,Strategic / Operational,
+Business Development Manager,Strategic,Operational,Strategic / Operational,
+Capital Planning Manager,Strategic,Analytical,Strategic / Analytical,
+Category Development Manager,Strategic,Operational,Strategic / Operational,CPG
+Content Acquisition Manager,Strategic,Operational,Strategic / Operational,Media & Entertainment
+Development Executive,Strategic,—,Strategic,Media & Entertainment
+Digital Transformation Manager,Strategic,Technical,Strategic / Technical,
+Drug Development Manager,Strategic,Technical,Strategic / Technical,Healthcare & Life Sciences
+Grid Modernization Manager,Strategic,Technical,Strategic / Technical,
+Head Buyer,Strategic,Operational,Strategic / Operational,
+Head of Merchandising,Strategic,Operational,Strategic / Operational,Retail
+IP Strategy Manager,Strategic,Governance,Strategic / Governance,
+Innovation Manager,Strategic,Technical,Strategic / Technical,
+Market Access Manager,Strategic,Governance,Strategic / Governance,
+Platform Product Manager,Strategic,Technical,Strategic / Technical,
+Product Development Manager,Strategic,Technical,Strategic / Technical,Retail
+Product Lifecycle Manager,Strategic,Technical,Strategic / Technical,
+Program Manager,Strategic,Operational,Strategic / Operational,
+Project Developer,Strategic,Operational,Strategic / Operational,
+Revenue Growth Manager,Strategic,Analytical,Strategic / Analytical,", CPG"
+AMI Manager,Technical,Operational,Technical / Operational,Energy & Utilities
+Asset Integrity Engineer,Technical,Governance,Technical / Governance,
+Biostatistician,Technical,Analytical,Technical / Analytical,
+Broadcast Producer,Technical,Operational,Technical / Operational,
+Clinical Affairs Manager,Technical,Governance,Technical / Governance,
+Clinical Development Manager,Technical,Operational,Technical / Operational,
+Connected Vehicle Data Manager,Technical,Analytical,Technical / Analytical,
+Data Engineer,Technical,Analytical,Technical / Analytical,
+Design Engineer,Technical,—,Technical,Manufacturing
+Digital Distribution Manager,Technical,Operational,Technical / Operational,
+Digital Health Manager,Technical,Operational,Technical / Operational,
+Ecosystem/Integrations Manager,Technical,Operational,Technical / Operational,
+Electronics Engineer,Technical,—,Technical,Manufacturing
+Formulation Scientist,Technical,—,Technical,
+Grid Cybersecurity Analyst,Technical,Governance,Technical / Governance,
+Grid Integration Manager,Technical,Operational,Technical / Operational,
+Ground Systems Engineer,Technical,—,Technical,
+Infrastructure Engineer,Technical,—,Technical,Technology & SaaS
+Infrastructure Manager,Technical,Operational,Technical / Operational,
+ML Engineer,Technical,Analytical,Technical / Analytical,Technology & SaaS
+Medical Affairs Manager,Technical,Governance,Technical / Governance,", CPG"
+Network Deployment Manager,Technical,Operational,Technical / Operational,Telecommunications
+Payments Engineer,Technical,—,Technical,
+Personalization Manager,Technical,Analytical,Technical / Analytical,
+Pharmacovigilance Analyst,Technical,Governance,Technical / Governance,
+Post-Production Manager,Technical,Operational,Technical / Operational,
+Process Engineer,Technical,—,Technical,Manufacturing
+Product Development Engineer,Technical,Operational,Technical / Operational,Manufacturing
+Product Engineer,Technical,—,Technical,Healthcare & Life Sciences
+Quality & Safety Manager,Technical,Governance,Technical / Governance,
+Quality Assurance Engineer,Technical,Governance,Technical / Governance,
+Quality Control Manager,Technical,Governance,Technical / Governance,
+Quality Engineer,Technical,Governance,Technical / Governance,
+Quality Manager,Technical,Governance,Technical / Governance,
+R&D Chemist,Technical,—,Technical,
+R&D Engineer,Technical,—,Technical,
+R&D Scientist,Technical,—,Technical,
+Reliability Engineer,Technical,Analytical,Technical / Analytical,
+Research Scientist,Technical,—,Technical,Healthcare & Life Sciences
+SRE Manager,Technical,Operational,Technical / Operational,
+Satellite Operations Manager,Technical,Operational,Technical / Operational,Telecommunications
+Search Optimization Manager,Technical,Analytical,Technical / Analytical,
+Security Engineer,Technical,Governance,Technical / Governance,
+Security Manager,Technical,Governance,Technical / Governance,
+Solutions Architect,Technical,Frontline,Technical / Frontline,
+Store Designer,Technical,Operational,Technical / Operational,
+Systems Integration Manager,Technical,Operational,Technical / Operational,
+Technical Writer,Technical,Frontline,Technical / Frontline,
+WMS Manager,Technical,Operational,Technical / Operational,
+Yield Engineer,Technical,Analytical,Technical / Analytical,
