@@ -761,6 +761,7 @@ for k, v in {
 
 # Apply theme CSS immediately on every render
 apply_theme(st.session_state.theme_dark)
+T = tv()  # theme tokens — available for sidebar AND main pane
 
 
 # ─────────────────────────────────────────────────────
@@ -1074,7 +1075,6 @@ if chat_input:
 # ─────────────────────────────────────────────────────
 # ════════════════  MAIN PANE  ════════════════════════
 # ─────────────────────────────────────────────────────
-T = tv()   # theme tokens for inline HTML — refreshed every render
 persona_icon   = layer_icon(active_persona_data.get("persona_layer", "Analytical")) if active_persona_data else "🐯"
 industry_label = industry
 
