@@ -378,23 +378,37 @@ def tv() -> dict:
     dark = st.session_state.get("theme_dark", True)
     if dark:
         return {
-            "bg":      "#0D0D0D", "sidebar": "#111111", "card":  "#141414",
-            "card2":   "#0F0F0F", "input":   "#1A1A1A", "border":"#2A2A2A",
-            "border2": "#1E1E1E", "text":    "#E8E8E8", "text2": "#AAAAAA",
-            "muted":   "#666666", "muted2":  "#444444", "tag":   "#1C1C1C",
-            "shadow":  "rgba(0,0,0,0.5)",
-            "acc":     "#F5A623", "green":   "#30D158", "red":   "#FF3B30",
-            "badge_fg":"#000000",
+            "bg":        "#0D0D0D", "sidebar":  "#111111", "card":    "#141414",
+            "card2":     "#0F0F0F", "input":    "#1A1A1A", "border":  "#2A2A2A",
+            "border2":   "#1E1E1E", "text":     "#E8E8E8", "text2":   "#AAAAAA",
+            "muted":     "#888888", "muted2":   "#555555", "tag":     "#1C1C1C",
+            "shadow":    "rgba(0,0,0,0.5)",
+            "acc":       "#F5A623", "acc_text": "#000000",
+            "green":     "#30D158", "red":      "#FF3B30",
+            "badge_fg":  "#000000",
+            # KPI type colours — vivid on dark
+            "c_trend":   "#F5A623", "c_sent":   "#30D158", "c_vel":   "#FF9F0A",
+            "c_heat":    "#FF3B30", "c_rank":   "#BF5AF2", "c_evt":   "#32ADE6",
+            "c_price":   "#64D2FF",
+            # signal card backgrounds
+            "sig_bg":    "#0F0F0F", "sig_ext":  "#1A0808",
         }
     else:
         return {
-            "bg":      "#F7F4EF", "sidebar": "#FFFFFF", "card":  "#FFFFFF",
-            "card2":   "#FDF9F3", "input":   "#FFFFFF", "border":"#E2D9CC",
-            "border2": "#EDE6DC", "text":    "#1A1009", "text2": "#4A3B2A",
-            "muted":   "#7A6A55", "muted2":  "#B0A090", "tag":   "#FDF1DE",
-            "shadow":  "rgba(90,60,10,0.10)",
-            "acc":     "#D4820A", "green":   "#1A7A3A", "red":   "#CC2200",
-            "badge_fg":"#FFFFFF",
+            "bg":        "#F7F4EF", "sidebar":  "#FFFFFF", "card":    "#FFFFFF",
+            "card2":     "#FDF9F3", "input":    "#FFFFFF", "border":  "#E2D9CC",
+            "border2":   "#EDE6DC", "text":     "#1A1009", "text2":   "#4A3B2A",
+            "muted":     "#6B5A45", "muted2":   "#9A8A78", "tag":     "#FDF1DE",
+            "shadow":    "rgba(90,60,10,0.10)",
+            "acc":       "#C47208", "acc_text": "#FFFFFF",
+            "green":     "#1A6B30", "red":      "#B51C00",
+            "badge_fg":  "#FFFFFF",
+            # KPI type colours — darker/richer on light bg for legibility
+            "c_trend":   "#B05E00", "c_sent":   "#1A6B30", "c_vel":   "#9A5000",
+            "c_heat":    "#B51C00", "c_rank":   "#6B2EA0", "c_evt":   "#0066AA",
+            "c_price":   "#005C8A",
+            # signal card backgrounds — warm tinted on light
+            "sig_bg":    "#FAFAF8", "sig_ext":  "#FFF5F3",
         }
 
 
@@ -806,7 +820,7 @@ with st.sidebar:
 
     # ── CONTEXT
     st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                'letter-spacing:0.18em;color:#F5A623;margin-bottom:0.5rem;">▸ CONTEXT</div>',
+                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ CONTEXT</div>',
                 unsafe_allow_html=True)
 
     # Industry dropdown (from CSV)
@@ -844,7 +858,7 @@ with st.sidebar:
 
     # ── FILE UPLOAD
     st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                'letter-spacing:0.18em;color:#F5A623;margin-bottom:0.5rem;">▸ SIGNAL UPLOAD</div>',
+                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ SIGNAL UPLOAD</div>',
                 unsafe_allow_html=True)
 
     uploaded_file = st.file_uploader(
@@ -874,22 +888,25 @@ with st.sidebar:
 
     # ── CHAT
     st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                'letter-spacing:0.18em;color:#F5A623;margin-bottom:0.5rem;">▸ COMMAND INTERFACE</div>',
+                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ COMMAND INTERFACE</div>',
                 unsafe_allow_html=True)
 
     chat_box = st.container(height=260)
     with chat_box:
         if not st.session_state.chat_history:
-            st.markdown('<div style="font-size:0.75rem;color:#444;font-style:italic;">'
-                        'Awaiting first signal…</div>', unsafe_allow_html=True)
+            st.markdown(
+                    f'<div style="font-size:0.75rem;color:{T["muted2"]};font-style:italic;">'
+                    f'Awaiting first signal…</div>',
+                    unsafe_allow_html=True,
+                )
         for msg in st.session_state.chat_history:
-            clr   = "#F5A623" if msg["role"] == "assistant" else "#E8E8E8"
+            clr   = "#F5A623" if msg["role"] == "assistant" else T["text"]
             label = "OS" if msg["role"] == "assistant" else "YOU"
             st.markdown(f"""
             <div style="margin-bottom:0.55rem;">
               <span style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;
                            color:{clr};letter-spacing:0.1em;">{label}</span>
-              <div style="font-size:0.76rem;color:#CCC;margin-top:0.1rem;
+              <div style="font-size:0.76rem;color:#777777;margin-top:0.1rem;
                           line-height:1.45;">{msg['content']}</div>
             </div>""", unsafe_allow_html=True)
 
@@ -1119,8 +1136,8 @@ else:
             p_desc = p_data.get("layer_description", "")
             p_branch = LAYER_BRANCH_MAP.get(p_primary, "evidence_artifact")
 
-            border_color = "#F5A623" if is_selected else "#2A2A2A"
-            bg_color     = "#1A1000" if is_selected else "#111111"
+            border_color = "#F5A623" if is_selected else T["border"]
+            bg_color     = T["tag"] if is_selected else T["card"]
             _badge_style = 'background:#F5A623;color:#000;font-family:"IBM Plex Mono",monospace;font-size:0.48rem;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;letter-spacing:0.08em;'
             selected_badge = f'<span style="{_badge_style}">ACTIVE</span>' if is_selected else ""
 
@@ -1227,7 +1244,7 @@ if not st.session_state.pipeline_ran:
     # Pipeline diagram
     st.markdown("""
     <div style="margin-top:1.5rem;font-family:IBM Plex Mono,monospace;font-size:0.6rem;
-                color:{T[\"border\"]};text-align:center;letter-spacing:0.07em;line-height:2.2;">
+                color:{T["muted2"]};text-align:center;letter-spacing:0.07em;line-height:2.2;">
       CONTEXT RESOLUTION → SOURCE INGESTION → SYNTHESIS AGENT → SIGNAL SCORING<br>
       → PERSONA ROUTING → ORCHESTRATION AGENT → REFLECTION AGENT → STUDIO OUTPUT
     </div>""", unsafe_allow_html=True)
@@ -1259,10 +1276,12 @@ else:
 
     # ─── TAB 1: SIGNAL CARDS ──────────────────────────
     with tab1:
-        st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.62rem;'
-                    'letter-spacing:0.2em;color:#F5A623;margin-bottom:1rem;">'
-                    '▸ CULTURAL INTELLIGENCE ALERTS — LIVE SIGNAL FEED</div>',
-                    unsafe_allow_html=True)
+        st.markdown(
+            f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
+            f'letter-spacing:0.2em;color:{T["acc"]};margin-bottom:1rem;">'
+            f'▸ CULTURAL INTELLIGENCE ALERTS — LIVE SIGNAL FEED</div>',
+            unsafe_allow_html=True,
+        )
 
         if not scored_signals:
             st.info("No signals detected — try adjusting context or uploading richer signal data.")
@@ -1274,10 +1293,10 @@ else:
                 sat      = sig.get("saturation_risk", "MEDIUM")
                 acc      = sig.get("acceleration_score", 0)
 
-                border = "#FF3B30" if is_ext else ("#F5A623" if virality >= 70 else "#2A2A2A")
-                bg     = "#1A0808" if is_ext else "#0F0F0F"
-                sat_c  = {"HIGH": "#FF3B30", "MEDIUM": "#F5A623", "LOW": "#30D158"}.get(sat, "#888")
-                bar_c  = "#FF3B30" if is_ext else ("#F5A623" if virality >= 70 else "#30D158")
+                border = T["red"] if is_ext else (T["acc"] if virality >= 70 else T["border"])
+                bg     = T["sig_ext"] if is_ext else T["sig_bg"]
+                sat_c  = {"HIGH": T["red"], "MEDIUM": T["acc"], "LOW": T["green"]}.get(sat, T["muted"])
+                bar_c  = T["red"] if is_ext else (T["acc"] if virality >= 70 else T["green"])
 
                 # ── Extreme virality banner (rendered separately to avoid raw HTML leak)
                 if is_ext:
@@ -1300,7 +1319,7 @@ else:
                       <div style="font-family:IBM Plex Mono,monospace;font-size:0.55rem;
                                   color:{T["muted2"]};letter-spacing:0.14em;text-transform:uppercase;">
                         SIGNAL #{i+1} &nbsp;·&nbsp; {sig.get("emergence_window","N/A")}</div>
-                      <div style="font-size:1.05rem;font-weight:700;color:#F5A623;
+                      <div style="font-size:1.05rem;font-weight:700;color:{T["acc"]};
                                   margin:0.25rem 0;font-family:Space Grotesk,sans-serif;">
                         {sig.get("niche_keyword","N/A")}</div>
                       <div style="font-size:0.78rem;color:{T["text2"]};">
@@ -1346,19 +1365,19 @@ else:
                 _kpi_key    = (_last_ctx.get("industry",""), _last_ctx.get("sub_industry",""), _last_ctx.get("persona_role",""))
                 _kpis       = KPI_MAP.get(_kpi_key, [])
                 _disp_icons = {
-                    "TREND_SCORE":  ("📈", "#F5A623"),
-                    "SENTIMENT":    ("💬", "#30D158"),
-                    "VELOCITY":     ("⚡", "#FF9F0A"),
-                    "HEAT_INDEX":   ("🔥", "#FF3B30"),
-                    "RANKED_LIST":  ("🏆", "#BF5AF2"),
-                    "EVENT_PULSE":  ("📡", "#32ADE6"),
-                    "PRICE_TRACKER":("💲", "#64D2FF"),
+                    "TREND_SCORE":   ("📈", T["c_trend"]),
+                    "SENTIMENT":     ("💬", T["c_sent"]),
+                    "VELOCITY":      ("⚡", T["c_vel"]),
+                    "HEAT_INDEX":    ("🔥", T["c_heat"]),
+                    "RANKED_LIST":   ("🏆", T["c_rank"]),
+                    "EVENT_PULSE":   ("📡", T["c_evt"]),
+                    "PRICE_TRACKER": ("💲", T["c_price"]),
                 }
                 if _kpis:
                     st.markdown(
-                        '<div style="font-family:IBM Plex Mono,monospace;font-size:0.52rem;'
-                        'letter-spacing:0.16em;color:{T["muted2"]};text-transform:uppercase;'
-                        'margin:0.5rem 0 0.4rem 0.1rem;">▸ SIGNAL KPIs FOR THIS PERSONA</div>',
+                        f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.52rem;'
+                        f'letter-spacing:0.16em;color:{T["muted2"]};text-transform:uppercase;'
+                        f'margin:0.5rem 0 0.4rem 0.1rem;">▸ SIGNAL KPIs FOR THIS PERSONA</div>',
                         unsafe_allow_html=True,
                     )
                     _kpi_cols = st.columns(min(len(_kpis), 5))
@@ -1391,8 +1410,8 @@ else:
         st.markdown("---")
         st.markdown(
             '<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
-            'letter-spacing:0.18em;color:#F5A623;margin-bottom:0.6rem;">'
-            '▸ IMAGEN 3 GENERATIVE STUDIO</div>',
+            f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.6rem;">'
+            f'▸ IMAGEN 3 GENERATIVE STUDIO</div>',
             unsafe_allow_html=True,
         )
 
@@ -1494,7 +1513,7 @@ else:
 
         # ── VTO
         st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.62rem;'
-                    'letter-spacing:0.18em;color:#F5A623;margin:1rem 0 0.6rem;">'
+                    f'letter-spacing:0.18em;color:{T["acc"]};margin:1rem 0 0.6rem;">'
                     '▸ VIRTUAL TRY-ON (Google VTO)</div>', unsafe_allow_html=True)
 
         vc1, vc2 = st.columns(2)
@@ -1567,29 +1586,33 @@ else:
 
     # ─── TAB 3: GOVERNANCE ──────────────────────────
     with tab3:
-        st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.62rem;'
-                    'letter-spacing:0.2em;color:#F5A623;margin-bottom:1rem;">'
-                    '▸ REFLECTION AGENT — GOVERNANCE &amp; BRAND SAFETY REVIEW</div>',
-                    unsafe_allow_html=True)
+        st.markdown(
+            f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
+            f'letter-spacing:0.2em;color:{T["acc"]};margin-bottom:1rem;">'
+            f'▸ REFLECTION AGENT — GOVERNANCE &amp; BRAND SAFETY REVIEW</div>',
+            unsafe_allow_html=True,
+        )
 
         if st.session_state.reflection_output:
             st.markdown(st.session_state.reflection_output)
         elif active_branch_run in REVIEW_BRANCHES:
             st.info("Governance review will appear here after the pipeline runs.")
         else:
-            st.markdown(f"""
-            <div style="border:1px solid {T["border"]};border-radius:6px;padding:1.2rem;
-                        background:{T["card2"]};text-align:center;">
-              <div style="font-size:0.82rem;color:{T["muted"]};">
-                Governance review is not required for the
-                <strong style="color:#F5A623;">{BRANCH_LABELS.get(active_branch_run, active_branch_run)}</strong>
-                branch.<br>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:{T["muted2"]};">
-                  Reflection Agent activates for: commercial, execution,
-                  field-action, and governance routes.
-                </span>
-              </div>
-            </div>""", unsafe_allow_html=True)
+            _branch_label = BRANCH_LABELS.get(active_branch_run, active_branch_run)
+            st.markdown(
+                f'<div style="border:1px solid {T["border"]};border-radius:8px;padding:1.4rem;'
+                f'background:{T["card2"]};text-align:center;">',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f'<div style="font-size:0.82rem;color:{T["muted"]};line-height:1.7;">' +
+                f'Governance review is not required for the ' +
+                f'<strong style="color:{T["acc"]}">{_branch_label}</strong> branch.<br>' +
+                f'<span style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;color:{T["muted2"]};">' +
+                f'Reflection Agent activates for: commercial, execution, field-action, and governance routes.' +
+                f'</span></div></div>',
+                unsafe_allow_html=True,
+            )
 
     # ── JSON Inspector
     st.markdown("<div style='margin-top:1.5rem;'></div>", unsafe_allow_html=True)
