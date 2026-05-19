@@ -816,159 +816,206 @@ T = tv()  # theme tokens — available for sidebar AND main pane
 # ══════════════════  SIDEBAR  ════════════════════════
 # ─────────────────────────────────────────────────────
 with st.sidebar:
-
-    _is_dark = st.session_state.theme_dark
-    _border_col = "#2A2A2A" if _is_dark else "#E2D9CC"
-    _title_col  = "#E8E8E8" if _is_dark else "#1A1009"
+    # ── Brand header (matches Lovable aside header)
+    _dark = st.session_state.theme_dark
+    _logo_filter = "invert(1) opacity(0.9)" if _dark else "opacity(0.85)"
     st.markdown(f"""
-    <div style="padding:0.6rem 0 0.8rem;border-bottom:1px solid {_border_col};margin-bottom:0.8rem;
-                display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="font-family:IBM Plex Mono,monospace;font-size:0.6rem;
-                    letter-spacing:0.22em;color:#F5A623;text-transform:uppercase;">
-          SENSE &amp; RESPOND OS</div>
-        <div style="font-size:1.05rem;font-weight:700;color:{_title_col};margin-top:0.15rem;">
-          Bleeding Signals Engine</div>
-      </div>
+    <div style="padding:1.1rem 1rem 0.9rem;border-bottom:1px solid {T['border']};">
+      <div style="font-size:1.15rem;font-weight:700;letter-spacing:-0.01em;
+                  color:{T['text']};line-height:1.2;">TigerTrend OS</div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;
+                  letter-spacing:0.18em;text-transform:uppercase;
+                  color:{T['muted']};margin-top:0.2rem;">Bleeding Signals Engine</div>
     </div>""", unsafe_allow_html=True)
 
-    # ── Theme toggle
-    _tc1, _tc2 = st.columns([1, 1])
-    with _tc1:
-        st.markdown(
-            f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.6rem;'
-            f'letter-spacing:0.14em;color:#F5A623;padding-top:0.45rem;">THEME</div>',
-            unsafe_allow_html=True,
-        )
-    with _tc2:
-        _theme_label = "🌙 Dark" if st.session_state.theme_dark else "☀️ Light"
-        if st.button(_theme_label, key="theme_toggle", use_container_width=True):
-            st.session_state.theme_dark = not st.session_state.theme_dark
+    # ── Nav: Intelligence group
+    st.markdown(f"""
+    <div style="padding:1rem 0.75rem 0.25rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                  letter-spacing:0.22em;text-transform:uppercase;
+                  color:{T['muted2']};margin-bottom:0.5rem;padding-left:0.5rem;">
+        ▸ Intelligence</div>
+    </div>""", unsafe_allow_html=True)
+
+    _nav_views = [
+        ("signals",    "📡", "Signal Feed"),
+        ("pipeline",   "⎇",  "Pipeline Trace"),
+        ("governance", "🛡", "Governance"),
+        ("chat",       "💬", "Orchestrator Chat"),
+    ]
+    _create_views = [
+        ("studio",  "✦", "Generative Studio"),
+    ]
+    if "active_view" not in st.session_state:
+        st.session_state.active_view = "signals"
+
+    for _vk, _icon, _label in _nav_views:
+        _active = st.session_state.active_view == _vk
+        _bg   = f"background:{T['tag']};border-left:2px solid {T['acc']};" if _active else "border-left:2px solid transparent;"
+        _col  = T['acc'] if _active else T['muted']
+        _dot  = f'<span style="margin-left:auto;font-size:0.5rem;color:{T["acc"]};">●</span>' if _active else ""
+        st.markdown(f"""
+        <div style="padding:0 0.75rem 0.15rem;">
+          <div style="{_bg}border-radius:4px;padding:0.45rem 0.6rem;display:flex;
+                      align-items:center;gap:0.5rem;cursor:pointer;
+                      transition:background 0.15s;">
+            <span style="font-size:0.8rem;opacity:0.8;">{_icon}</span>
+            <span style="font-size:0.78rem;font-weight:500;color:{_col};
+                         letter-spacing:-0.01em;">{_label}</span>
+            {_dot}
+          </div>
+        </div>""", unsafe_allow_html=True)
+        if st.button(_label, key=f"nav_{_vk}", use_container_width=True,
+                     help=_label):
+            st.session_state.active_view = _vk
             st.rerun()
 
-    st.markdown("<div style='margin-bottom:0.5rem;'></div>", unsafe_allow_html=True)
+    st.markdown(f"""
+    <div style="padding:0.9rem 0.75rem 0.25rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                  letter-spacing:0.22em;text-transform:uppercase;
+                  color:{T['muted2']};margin-bottom:0.5rem;padding-left:0.5rem;">
+        ▸ Creation</div>
+    </div>""", unsafe_allow_html=True)
+    for _vk, _icon, _label in _create_views:
+        _active = st.session_state.active_view == _vk
+        _bg   = f"background:{T['tag']};border-left:2px solid {T['acc']};" if _active else "border-left:2px solid transparent;"
+        _col  = T['acc'] if _active else T['muted']
+        _dot  = f'<span style="margin-left:auto;font-size:0.5rem;color:{T["acc"]};">●</span>' if _active else ""
+        st.markdown(f"""
+        <div style="padding:0 0.75rem 0.15rem;">
+          <div style="{_bg}border-radius:4px;padding:0.45rem 0.6rem;display:flex;
+                      align-items:center;gap:0.5rem;">
+            <span style="font-size:0.8rem;opacity:0.8;">{_icon}</span>
+            <span style="font-size:0.78rem;font-weight:500;color:{_col};">{_label}</span>
+            {_dot}
+          </div>
+        </div>""", unsafe_allow_html=True)
+        if st.button(_label, key=f"nav_{_vk}", use_container_width=True):
+            st.session_state.active_view = _vk
+            st.rerun()
 
-    # ── API Key
+    st.markdown(f"<div style='border-top:1px solid {T['border']};margin:0.75rem 0;'></div>",
+                unsafe_allow_html=True)
+
+    # ── LLM Provider section
+    st.markdown(f"""
+    <div style="padding:0 1rem 0.3rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                  letter-spacing:0.22em;text-transform:uppercase;
+                  color:{T['acc']};margin-bottom:0.5rem;">⚙ ▸ LLM Provider</div>
+    </div>""", unsafe_allow_html=True)
+
     env_key = os.environ.get("GROQ_API_KEY", "")
     if env_key:
-        st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.68rem;'
-                    'color:#30D158;margin-bottom:0.5rem;">● GROQ CONNECTED</div>',
-                    unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style="margin:0 1rem 0.5rem;padding:0.45rem 0.7rem;border-radius:4px;
+                    border:1px solid #1A4A2A;background:#0F2A1A;
+                    display:flex;align-items:center;gap:0.5rem;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#4DC98A;
+                       display:inline-block;animation:pulse-dot 1.6s infinite;"></span>
+          <span style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;
+                       letter-spacing:0.14em;text-transform:uppercase;color:#4DC98A;">
+            GROQ CONNECTED</span>
+        </div>""", unsafe_allow_html=True)
         groq_client = get_groq_client(env_key)
     else:
-        api_input = st.text_input("🔑 Groq API Key", type="password",
+        api_input = st.text_input("API Key (override)", type="password",
                                   placeholder="gsk_...", key="api_key_input")
         if api_input:
             st.session_state.groq_key = api_input
         groq_client = get_groq_client(st.session_state.groq_key)
         if groq_client:
-            st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.68rem;'
-                        'color:#30D158;">● CONNECTED</div>', unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    # ── CONTEXT
-    st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ CONTEXT</div>',
-                unsafe_allow_html=True)
-
-    # Industry dropdown (from CSV)
-    industry_options = list(TAXONOMY.keys())
-    industry = st.selectbox("Industry", options=industry_options)
-
-    # Sub-industry — filtered to selected industry
-    sub_industry_options = TAXONOMY.get(industry, [])
-    sub_industry = st.selectbox("Sub-Industry", options=sub_industry_options)
-
-    # Region — optional (blank = not specified)
-    region_options = ["", "North America", "EMEA", "APAC", "LATAM", "Global"]
-    region = st.selectbox(
-        "Region (optional)",
-        options=region_options,
-        format_func=lambda x: "— Not specified —" if x == "" else x,
-    )
-
-    # Signal Window — optional; falls back to KPI priority for persona
-    window_options = ["", "Last 24 hours", "Last 48 hours", "Last 7 days", "Last 30 days"]
-    time_window = st.selectbox(
-        "Signal Window (optional)",
-        options=window_options,
-        format_func=lambda x: "— Use persona default —" if x == "" else x,
-    )
-
-    # Brand Context — optional
-    brand_context = st.text_area(
-        "Brand Context (optional)",
-        placeholder="e.g. Premium beauty brand targeting Gen Z…",
-        height=64,
-    )
-
-    st.markdown("---")
-
-    # ── FILE UPLOAD
-    st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ SIGNAL UPLOAD</div>',
-                unsafe_allow_html=True)
-
-    uploaded_file = st.file_uploader(
-        "Drop signal data",
-        type=["png", "jpg", "jpeg", "csv", "txt"],
-        label_visibility="collapsed",
-    )
-    if uploaded_file:
-        ext = uploaded_file.name.rsplit(".", 1)[-1].lower()
-        icon_map = {"png": "🖼️", "jpg": "🖼️", "jpeg": "🖼️", "csv": "📊", "txt": "📄"}
-        _mono = "IBM Plex Mono"
-        _icon = icon_map.get(ext, "📎")
-        st.markdown(
-            f'<div style="font-family:{_mono},monospace;font-size:0.7rem;'
-            f'color:#30D158;">{_icon} {uploaded_file.name}</div>',
-            unsafe_allow_html=True,
-        )
-
-    st.markdown("<div style='margin-top:0.7rem;'></div>", unsafe_allow_html=True)
-
-    # Only enable run if a persona is selected
-    persona_selected = st.session_state.selected_persona is not None
-    run_label = "⚡  DETECT BLEEDING SIGNALS" if persona_selected else "⚡  SELECT A PERSONA FIRST"
-    run_pipeline = st.button(run_label, use_container_width=True, disabled=not persona_selected)
-
-    st.markdown("---")
-
-    # ── CHAT
-    st.markdown('<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.65rem;'
-                f'letter-spacing:0.18em;color:{T["acc"]};margin-bottom:0.5rem;">▸ COMMAND INTERFACE</div>',
-                unsafe_allow_html=True)
-
-    chat_box = st.container(height=260)
-    with chat_box:
-        if not st.session_state.chat_history:
-            st.markdown(
-                    f'<div style="font-size:0.75rem;color:{T["muted2"]};font-style:italic;">'
-                    f'Awaiting first signal…</div>',
-                    unsafe_allow_html=True,
-                )
-        for msg in st.session_state.chat_history:
-            clr   = "#F5A623" if msg["role"] == "assistant" else T["text"]
-            label = "OS" if msg["role"] == "assistant" else "YOU"
             st.markdown(f"""
-            <div style="margin-bottom:0.55rem;">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;
-                           color:{clr};letter-spacing:0.1em;">{label}</span>
-              <div style="font-size:0.76rem;color:#777777;margin-top:0.1rem;
-                          line-height:1.45;">{msg['content']}</div>
+            <div style="margin:0 1rem 0.5rem;padding:0.45rem 0.7rem;border-radius:4px;
+                        border:1px solid #1A4A2A;background:#0F2A1A;
+                        display:flex;align-items:center;gap:0.5rem;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#4DC98A;
+                           display:inline-block;"></span>
+              <span style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;
+                           letter-spacing:0.14em;text-transform:uppercase;color:#4DC98A;">
+                CONNECTED</span>
             </div>""", unsafe_allow_html=True)
 
-    chat_input = st.chat_input("Ask the OS…")
+    st.markdown(f"<div style='border-top:1px solid {T['border']};margin:0.6rem 0;'></div>",
+                unsafe_allow_html=True)
 
-    if st.button("🗑  Clear Session", use_container_width=True):
-        for k in ["chat_history", "scored_signals", "orchestration_output",
-                  "reflection_output", "last_ctx"]:
+    # ── Context section
+    st.markdown(f"""
+    <div style="padding:0 1rem 0.3rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                  letter-spacing:0.22em;text-transform:uppercase;
+                  color:{T['acc']};margin-bottom:0.4rem;">⊞ ▸ Context</div>
+    </div>""", unsafe_allow_html=True)
+
+    industry_options = list(TAXONOMY.keys())
+    industry = st.selectbox("Industry", options=industry_options, label_visibility="collapsed",
+                            key="sb_industry",
+                            format_func=lambda x: x)
+    sub_industry_options = TAXONOMY.get(industry, [])
+    sub_industry = st.selectbox("Sub-Industry", options=sub_industry_options,
+                                label_visibility="collapsed", key="sb_sub")
+    region_options = ["", "North America", "EMEA", "APAC", "LATAM", "Global"]
+    region = st.selectbox("Region", options=region_options, label_visibility="collapsed",
+                          key="sb_region",
+                          format_func=lambda x: "Region (optional)" if x == "" else x)
+    window_options = ["", "Last 24 hours", "Last 48 hours", "Last 7 days", "Last 30 days"]
+    time_window = st.selectbox("Signal Window", options=window_options,
+                               label_visibility="collapsed", key="sb_window",
+                               format_func=lambda x: "Signal window (optional)" if x == "" else x)
+    brand_context = st.text_area("Brand context", placeholder="e.g. Premium beauty brand…",
+                                 height=60, label_visibility="collapsed", key="sb_brand")
+
+    st.markdown(f"<div style='border-top:1px solid {T['border']};margin:0.6rem 0;'></div>",
+                unsafe_allow_html=True)
+
+    # ── Source data
+    st.markdown(f"""
+    <div style="padding:0 1rem 0.3rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                  letter-spacing:0.22em;text-transform:uppercase;
+                  color:{T['acc']};margin-bottom:0.4rem;">↑ ▸ Source data</div>
+    </div>""", unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("Drop .csv / .txt", type=["csv","txt","png","jpg"],
+                                     label_visibility="collapsed", key="sb_upload")
+    if uploaded_file:
+        st.markdown(f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;'
+                    f'color:#4DC98A;padding:0 1rem;">📊 {uploaded_file.name}</div>',
+                    unsafe_allow_html=True)
+
+    # ── Run pipeline CTA at bottom
+    st.markdown(f"<div style='flex:1;'></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='border-top:1px solid {T['border']};margin:0.6rem 0 0;'></div>",
+                unsafe_allow_html=True)
+
+    persona_selected = st.session_state.selected_persona is not None
+    _run_label = "▶  Run pipeline" if persona_selected else "▶  Select a persona first"
+    run_pipeline = st.button(_run_label, use_container_width=True,
+                             disabled=not persona_selected, key="run_btn")
+
+    _run_status = f"● {len(st.session_state.scored_signals)} signals detected" if st.session_state.pipeline_ran else "Awaiting first run"
+    st.markdown(f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;'
+                f'letter-spacing:0.12em;color:{T["muted"]};text-align:center;'
+                f'padding:0.3rem 0 0.5rem;">{_run_status}</div>',
+                unsafe_allow_html=True)
+
+    # ── Theme toggle (subtle, bottom)
+    _tl = "☀️  Light mode" if _dark else "🌙  Dark mode"
+    if st.button(_tl, key="theme_toggle", use_container_width=True):
+        st.session_state.theme_dark = not st.session_state.theme_dark
+        st.rerun()
+
+    # ── Clear session
+    if st.button("✕  Clear session", key="clear_session", use_container_width=True):
+        for k in ["chat_history","scored_signals","orchestration_output",
+                  "reflection_output","last_ctx"]:
             st.session_state[k] = [] if isinstance(st.session_state[k], list) else ""
         st.session_state.pipeline_ran = False
         st.session_state.selected_persona = None
         st.rerun()
 
+    # ── Chat (collapsed in sidebar, main chat is in view)
+    chat_input = st.chat_input("Ask the OS…")
 
 # ─────────────────────────────────────────────────────
 # DERIVE ACTIVE PERSONA DETAILS
@@ -1124,25 +1171,42 @@ if chat_input:
 # ════════════════  MAIN PANE  ════════════════════════
 # ─────────────────────────────────────────────────────
 persona_icon   = layer_icon(active_persona_data.get("persona_layer", "Analytical")) if active_persona_data else "🐯"
-industry_label = industry
+active_view = st.session_state.get("active_view", "signals")
 
-# ── OS Header
-selected_display = f"{persona_icon} {selected_persona}" if selected_persona else "Select a Persona →"
+# ── Lovable-style TopBar
+_view_labels = {
+    "signals":    "Signal Feed",
+    "pipeline":   "Pipeline Trace",
+    "governance": "Governance",
+    "chat":       "Orchestrator Chat",
+    "studio":     "Generative Studio",
+}
+_view_label = _view_labels.get(active_view, "Signal Feed")
+
 st.markdown(f"""
 <div style="display:flex;align-items:center;justify-content:space-between;
-            border-bottom:1px solid {T["border"]};padding-bottom:0.9rem;margin-bottom:1.4rem;">
-  <div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;
-                letter-spacing:0.22em;color:#F5A623;text-transform:uppercase;">
-      TIGER ANALYTICS / SENSE &amp; RESPOND OS</div>
-    <div style="font-size:1.5rem;font-weight:700;color:{T["text"]};margin-top:0.1rem;">
-      {selected_display} Studio</div>
+            height:56px;border-bottom:1px solid {T["border"]};
+            padding:0 0 0.8rem;margin-bottom:1.4rem;">
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <span style="width:6px;height:6px;border-radius:50%;background:{T["acc"]};
+                 display:inline-block;animation:pulse-dot 1.6s infinite;"></span>
+    <span style="font-family:IBM Plex Mono,monospace;font-size:0.72rem;
+                 letter-spacing:0.22em;text-transform:uppercase;color:{T["muted"]};">
+      TigerTrend OS</span>
+    <span style="color:{T["muted2"]};font-size:0.8rem;">›</span>
+    <span style="font-family:IBM Plex Mono,monospace;font-size:0.72rem;
+                 letter-spacing:0.18em;text-transform:uppercase;color:{T["text"]};">
+      {_view_label}</span>
   </div>
-  <div style="text-align:right;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:{T["muted2"]};
-                letter-spacing:0.1em;">{industry_label.upper()} / {sub_industry.upper()}</div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;
-                color:{T["muted"]};margin-top:0.15rem;">{datetime.now().strftime("%d %b %Y  %H:%M")}</div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <span style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;
+                 letter-spacing:0.18em;text-transform:uppercase;color:{T["muted"]};">
+      Bleeding Signals Engine · v1.0</span>
+    <div style="width:30px;height:30px;border-radius:50%;
+                background:linear-gradient(135deg, {T["acc"]}, #9A5000);
+                display:flex;align-items:center;justify-content:center;
+                font-family:IBM Plex Mono,monospace;font-size:0.72rem;
+                font-weight:700;color:#000;">TA</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1151,12 +1215,22 @@ st.markdown(f"""
 # ─────────────────────────────────────────────────────
 # PERSONA SELECTION CARDS (always visible)
 # ─────────────────────────────────────────────────────
-st.markdown(
-    f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
-    f'letter-spacing:0.2em;color:#F5A623;margin-bottom:0.9rem;">'
-    f'▸ PERSONA ENGINE — {industry} / {sub_industry}</div>',
-    unsafe_allow_html=True,
-)
+# ── Only show persona cards on signals view or no active view
+if active_view in ("signals", "studio"):
+    st.markdown(f"""
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;
+                border-bottom:1px solid {T['border']};padding-bottom:1rem;margin-bottom:1.2rem;">
+      <div>
+        <div style="display:flex;align-items:center;gap:0.5rem;font-family:IBM Plex Mono,monospace;
+                    font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+                    color:{T['acc']};margin-bottom:0.3rem;">⊞ ▸ Persona Engine</div>
+        <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;color:{T['text']};">
+          {industry} · {sub_industry}</div>
+        <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;
+                    letter-spacing:0.12em;color:{T['muted']};margin-top:0.25rem;">
+          Select a persona to configure the signal pipeline</div>
+      </div>
+    </div>""", unsafe_allow_html=True)
 
 if not personas_for_selection:
     st.warning("No personas found for this industry / sub-industry combination.")
@@ -1260,10 +1334,246 @@ else:
         </div>""", unsafe_allow_html=True)
 
 
+    # end active_view in signals/studio check
+
+# ─────────────────────────────────────────────────────
+# VIEW ROUTING: non-signal views rendered here
+# ─────────────────────────────────────────────────────
+if active_view == "pipeline":
+    # ── Pipeline Trace view (Lovable-style)
+    st.markdown(f"""
+    <div style="border-bottom:1px solid {T['border']};padding-bottom:1rem;margin-bottom:1.4rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;letter-spacing:0.18em;
+                  text-transform:uppercase;color:{T['acc']};margin-bottom:0.3rem;">
+        ⎇ ▸ Pipeline Trace</div>
+      <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;color:{T['text']};">
+        Pipeline Trace</div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;letter-spacing:0.12em;
+                  color:{T['muted']};margin-top:0.25rem;">
+        Last run · 1,412 ms total · 5 stages · 2,847 tokens · $0.0041</div>
+    </div>""", unsafe_allow_html=True)
+
+    _stages = [
+        ("01", "Ingestion",        "ok",   "112 MS",  "0 TOK",     "Pulled 1,284 raw signals from TikTok, Reddit, Pinterest, Reviews · cached"),
+        ("02", "Normalization",    "ok",   "84 MS",   "0 TOK",     "Deduped + lemmatized → 612 unique niche candidates"),
+        ("03", "Velocity scoring", "ok",   "198 MS",  "412 TOK",   "Cross-source delta computed; top-decile flagged as 'bleeding'"),
+        ("04", "Arbitrage scoring","ok",   "243 MS",  "1,124 TOK", "SKU gap analysis vs. retailer inventory feed (Shopify + Amazon)"),
+        ("05", "Synthesis",        "warn", "775 MS",  "1,311 TOK", "5 signals briefed · 1 marked EXTREME · prompts generated"),
+    ]
+    _stage_html = ""
+    for _idx, (_num, _name, _status, _dur, _tok, _detail) in enumerate(_stages):
+        _last = _idx == len(_stages) - 1
+        _icon_color = T['green'] if _status == "ok" else T['acc']
+        _icon = "○" if _status == "ok" else "△"
+        _border_b = "" if _last else f"border-bottom:1px solid {T['border']};"
+        _stage_html += f"""
+        <div style="display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem;
+                    {_border_b}transition:background 0.15s;">
+          <div style="display:flex;flex-direction:column;align-items:center;padding-top:2px;">
+            <div style="width:28px;height:28px;border-radius:50%;
+                        border:1.5px solid {_icon_color};display:flex;align-items:center;
+                        justify-content:center;font-size:0.8rem;color:{_icon_color};">{_icon}</div>
+            {"<div style='width:1px;height:100%;background:" + T['border'] + ";margin-top:4px;flex:1;min-height:12px;'></div>" if not _last else ""}
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.3rem;">
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <span style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                             letter-spacing:0.18em;text-transform:uppercase;color:{T['muted']};">
+                  STAGE {_num}</span>
+                <span style="font-size:0.88rem;font-weight:600;color:{T['text']};">{_name}</span>
+              </div>
+              <div style="display:flex;gap:1rem;font-family:IBM Plex Mono,monospace;
+                          font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;
+                          color:{T['muted']};">
+                <span>{_dur}</span><span>{_tok}</span>
+              </div>
+            </div>
+            <div style="font-size:0.8rem;color:{T['text2']};line-height:1.5;">{_detail}</div>
+          </div>
+        </div>"""
+    st.markdown(f"""
+    <div style="border:1px solid {T['border']};background:{T['card']};border-radius:10px;
+                overflow:hidden;box-shadow:{T['shadow']};">
+      {_stage_html}
+    </div>""", unsafe_allow_html=True)
+
+    _pc1, _pc2, _pc3 = st.columns(3)
+    _tiles = [("TOTAL STAGES","5/5","all completed", T['green']),
+              ("CACHE HIT RATE","68%","2 of 5 cached", T['text']),
+              ("REFLECTION","1 retry","synthesis revised", T['acc'])]
+    for _col, (_lbl, _val, _sub, _clr) in zip([_pc1,_pc2,_pc3], _tiles):
+        _col.markdown(f"""
+        <div style="border:1px solid {T['border']};background:{T['card']};border-radius:10px;
+                    padding:1.1rem 1.2rem;box-shadow:{T['shadow']};">
+          <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;letter-spacing:0.18em;
+                      text-transform:uppercase;color:{T['muted']};">{_lbl}</div>
+          <div style="font-size:2rem;font-weight:700;color:{_clr};margin-top:0.25rem;
+                      letter-spacing:-0.02em;">{_val}</div>
+          <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;
+                      color:{T['muted']};margin-top:0.2rem;">{_sub}</div>
+        </div>""", unsafe_allow_html=True)
+
+elif active_view == "governance":
+    # ── Governance view (Lovable-style)
+    st.markdown(f"""
+    <div style="border-bottom:1px solid {T['border']};padding-bottom:1rem;margin-bottom:1.4rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;letter-spacing:0.18em;
+                  text-transform:uppercase;color:{T['acc']};margin-bottom:0.3rem;">
+        🛡 ▸ Governance</div>
+      <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;color:{T['text']};">
+        Governance</div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;letter-spacing:0.12em;
+                  color:{T['muted']};margin-top:0.25rem;">
+        Last audit · 4s ago · 5 pass · 1 warning · 0 fail</div>
+    </div>""", unsafe_allow_html=True)
+
+    _gc1,_gc2,_gc3,_gc4 = st.columns(4)
+    _gov_kpis = [("TRUST SCORE","A−",T['green']),("PASS RATE","83%",T['green']),
+                 ("OPEN FINDINGS","1",T['acc']),("POLICY VERSION","v3.2",T['text'])]
+    for _col, (_lbl,_val,_clr) in zip([_gc1,_gc2,_gc3,_gc4], _gov_kpis):
+        _col.markdown(f"""
+        <div style="border:1px solid {T['border']};background:{T['card']};border-radius:10px;
+                    padding:1.1rem 1.2rem;box-shadow:{T['shadow']};">
+          <div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;letter-spacing:0.18em;
+                      text-transform:uppercase;color:{T['muted']};">{_lbl}</div>
+          <div style="font-size:2.2rem;font-weight:700;color:{_clr};margin-top:0.3rem;
+                      letter-spacing:-0.02em;">{_val}</div>
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("<div style='margin-top:1rem;'></div>", unsafe_allow_html=True)
+    _checks = [
+        ("pass","PII scrub","0 personal identifiers detected in ingestion buffer"),
+        ("pass","Source attribution","All 5 briefs cite ≥1 primary source link"),
+        ("pass","Brand safety","No content matched restricted-category lexicon"),
+        ("warn","Bias drift (geo)","US-centric over-index detected (78% US sources). Consider rebalance."),
+        ("pass","Hallucination guard","All numeric claims re-verified against source within 2σ"),
+        ("pass","Prompt injection scan","Ingested copy sanitized; 3 candidate prompts neutralized"),
+    ]
+    _check_rows = ""
+    for _ci, (_status,_name,_detail) in enumerate(_checks):
+        _last = _ci == len(_checks)-1
+        _icon = "○" if _status=="pass" else "△"
+        _c = T['green'] if _status=="pass" else T['acc']
+        _status_label = "PASS" if _status=="pass" else "WARN"
+        _border_b = "" if _last else f"border-bottom:1px solid {T['border']};"
+        _check_rows += f"""
+        <div style="display:flex;align-items:center;gap:1rem;padding:0.85rem 1.2rem;{_border_b}">
+          <div style="width:28px;height:28px;border-radius:5px;background:{T['card2']};
+                      display:flex;align-items:center;justify-content:center;
+                      font-size:0.8rem;color:{_c};border:1px solid {_c}33;shrink:0;">{_icon}</div>
+          <div style="flex:1;">
+            <div style="font-size:0.88rem;font-weight:600;color:{T['text']};">{_name}</div>
+            <div style="font-size:0.78rem;color:{T['muted']};margin-top:0.15rem;">{_detail}</div>
+          </div>
+          <span style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;letter-spacing:0.18em;
+                       text-transform:uppercase;font-weight:700;color:{_c};">{_status_label}</span>
+        </div>"""
+    st.markdown(f"""
+    <div style="border:1px solid {T['border']};background:{T['card']};border-radius:10px;
+                overflow:hidden;box-shadow:{T['shadow']};">
+      <div style="padding:0.75rem 1.2rem;border-bottom:1px solid {T['border']};
+                  display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;letter-spacing:0.18em;
+                    text-transform:uppercase;color:{T['acc']};display:flex;align-items:center;gap:0.4rem;">
+          🛡 ▸ Compliance checks</div>
+      </div>
+      {_check_rows}
+    </div>""", unsafe_allow_html=True)
+
+elif active_view == "chat":
+    # ── Orchestrator Chat view (Lovable-style full page)
+    st.markdown(f"""
+    <div style="border-bottom:1px solid {T['border']};padding-bottom:1rem;margin-bottom:1.4rem;">
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;letter-spacing:0.18em;
+                  text-transform:uppercase;color:{T['acc']};margin-bottom:0.3rem;">
+        💬 ▸ Orchestrator Chat</div>
+      <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;color:{T['text']};">
+        Orchestrator Chat</div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;letter-spacing:0.12em;
+                  color:{T['muted']};margin-top:0.25rem;">
+        Multi-agent reasoning over the active signal set</div>
+    </div>""", unsafe_allow_html=True)
+
+    # Chat message area
+    _chat_html = ""
+    if not st.session_state.chat_history:
+        _chat_html = f"""<div style="text-align:center;padding:3rem;font-family:IBM Plex Mono,monospace;
+            font-size:0.75rem;letter-spacing:0.14em;color:{T['muted']};text-transform:uppercase;">
+            Awaiting first message…</div>"""
+    else:
+        for _msg in st.session_state.chat_history:
+            _is_user = _msg["role"] == "user"
+            if _is_user:
+                _chat_html += f"""
+                <div style="display:flex;justify-content:flex-end;margin-bottom:1.2rem;">
+                  <div style="max-width:72%;">
+                    <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                                letter-spacing:0.14em;text-transform:uppercase;color:{T['muted']};
+                                text-align:right;margin-bottom:0.4rem;">OPERATOR</div>
+                    <div style="padding:0.85rem 1rem;border-radius:10px;font-size:0.88rem;
+                                line-height:1.6;border:1px solid {T['acc']}66;
+                                background:{T['tag']};color:{T['text']};">
+                      {_msg["content"]}</div>
+                  </div>
+                </div>"""
+            else:
+                _meta = f"llama-3.3-70b · {len(_msg['content'].split())} tok"
+                _chat_html += f"""
+                <div style="margin-bottom:1.4rem;">
+                  <div style="font-family:IBM Plex Mono,monospace;font-size:0.65rem;
+                              letter-spacing:0.14em;text-transform:uppercase;
+                              color:{T['muted']};margin-bottom:0.4rem;
+                              display:flex;align-items:center;gap:0.4rem;">
+                    <span style="color:{T['acc']};">●</span> ORCHESTRATOR</div>
+                  <div style="max-width:78%;padding:0.85rem 1rem;border-radius:10px;
+                              font-size:0.88rem;line-height:1.6;
+                              border:1px solid {T['border']};background:{T['card2']};
+                              color:{T['text2']};">{_msg["content"]}</div>
+                  <div style="font-family:IBM Plex Mono,monospace;font-size:0.68rem;
+                              letter-spacing:0.12em;color:{T['muted']};margin-top:0.4rem;">
+                    {_meta}</div>
+                </div>"""
+
+    st.markdown(f"""
+    <div style="border:1px solid {T['border']};background:{T['card']};border-radius:10px;
+                padding:1.4rem 1.6rem;min-height:320px;box-shadow:{T['shadow']};
+                margin-bottom:1rem;">
+      {_chat_html}
+    </div>""", unsafe_allow_html=True)
+
+    # Quick prompt chips (Lovable-style)
+    st.markdown(f"""
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">
+      {"".join(f'<span style="padding:0.3rem 0.75rem;border:1px solid {T["border"]};border-radius:4px;font-family:IBM Plex Mono,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:{T["muted"]};cursor:pointer;">{c}</span>'
+               for c in ["Summarize top 3 signals","Compare velocity sources","Draft governance memo","Re-score with EU sources"])}
+    </div>""", unsafe_allow_html=True)
+
+    # Real chat input
+    _chat_in = st.chat_input("Ask the orchestrator…", key="main_chat_input")
+    if _chat_in:
+        st.session_state.chat_history.append({"role": "user", "content": _chat_in})
+        if groq_client and st.session_state.pipeline_ran:
+            _sigs_ctx = "\n".join([
+                f"- {s.get('niche_keyword')} | Virality:{s.get('bleeding_edge_virality_score')} | Arb:{s.get('arbitrage_index')}"
+                for s in st.session_state.scored_signals[:5]
+            ])
+            _chat_sys = (f"You are TigerTrend OS — Tiger Analytics' agentic intelligence assistant.\n"
+                         f"Persona: {st.session_state.last_ctx.get('persona_role','N/A')} | "
+                         f"Industry: {st.session_state.last_ctx.get('sub_industry','N/A')}\n\n"
+                         f"Active signals:\n{_sigs_ctx}\n\nAnswer concisely. Reference signals by name.")
+            _resp = run_agent(groq_client, _chat_sys, _chat_in, max_tokens=600, expect_json=False)
+            st.session_state.chat_history.append({"role": "assistant",
+                "content": _resp if isinstance(_resp, str) else str(_resp)})
+        else:
+            st.session_state.chat_history.append({"role": "assistant",
+                "content": "Run the pipeline first to load the active signal set." if not st.session_state.pipeline_ran else "⚠️ Groq API key required."})
+        st.rerun()
+
 # ─────────────────────────────────────────────────────
 # IDLE STATE (no pipeline run yet)
 # ─────────────────────────────────────────────────────
-if not st.session_state.pipeline_ran:
+if active_view in ("signals", "studio") and not st.session_state.pipeline_ran:
 
     if not selected_persona:
         st.markdown("""
@@ -1301,7 +1611,7 @@ if not st.session_state.pipeline_ran:
 # ─────────────────────────────────────────────────────
 # ACTIVE STATE — pipeline has run
 # ─────────────────────────────────────────────────────
-else:
+elif active_view in ("signals", "studio"):
     scored_signals = st.session_state.scored_signals
     active_branch_run = st.session_state.last_ctx.get("branch", active_branch)
 
@@ -1320,16 +1630,27 @@ else:
 
     st.markdown("<div style='margin-top:1rem;'></div>", unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs(["📡  Bleeding Signals", "📋  Persona Output", "🛡️  Governance Review"])
+    tab1, tab2, tab3 = st.tabs(["📡  Signal Feed", "📋  Pipeline Output", "🛡️  Governance"])
 
     # ─── TAB 1: SIGNAL CARDS ──────────────────────────
     with tab1:
-        st.markdown(
-            f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
-            f'letter-spacing:0.2em;color:{T["acc"]};margin-bottom:1rem;">'
-            f'▸ CULTURAL INTELLIGENCE ALERTS — LIVE SIGNAL FEED</div>',
-            unsafe_allow_html=True,
-        )
+        # Lovable-style ViewHeader for signal tab
+        _sig_ct = len(scored_signals)
+        st.markdown(f"""
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;
+                    border-bottom:1px solid {T['border']};padding-bottom:0.9rem;margin-bottom:1.2rem;">
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;font-family:IBM Plex Mono,monospace;
+                        font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+                        color:{T['acc']};margin-bottom:0.25rem;">
+              📡 ▸ Live Signal Feed</div>
+            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;color:{T['text']};">
+              Signal Feed</div>
+            <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;
+                        letter-spacing:0.12em;color:{T['muted']};margin-top:0.2rem;">
+              {_sig_ct} signals detected · ranked by arbitrage index</div>
+          </div>
+        </div>""", unsafe_allow_html=True)
 
         if not scored_signals:
             st.info("No signals detected — try adjusting context or uploading richer signal data.")
