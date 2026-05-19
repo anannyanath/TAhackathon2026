@@ -36,379 +36,427 @@ if Path("tiger_logo.png").exists():
 # ─────────────────────────────────────────────────────
 # ── Theme tokens injected dynamically after theme toggle
 def apply_theme(dark: bool) -> None:
-    """Inject full CSS with correct theme tokens."""
+    """Inject CSS precisely matching the Lovable TigerTrend OS design system."""
     if dark:
-        tokens = {
-            "bg":         "#0D0D0D",
-            "sidebar_bg": "#111111",
-            "card_bg":    "#141414",
-            "card_bg2":   "#0F0F0F",
-            "input_bg":   "#1A1A1A",
-            "border":     "#2A2A2A",
-            "border2":    "#1E1E1E",
-            "text":       "#E8E8E8",
-            "text2":      "#AAAAAA",
-            "muted":      "#666666",
-            "muted2":     "#444444",
-            "header_text":"#0D0D0D",
-            "divider":    "#1E1E1E",
-            "tag_bg":     "#1C1C1C",
-            "shadow":     "rgba(0,0,0,0.6)",
-            "glow":       "rgba(245,166,35,0.35)",
-            "metric_bg":  "#111111",
-            "scroll_track":"#111111",
-            "scroll_thumb":"#2A2A2A",
-            "badge_text": "#0D0D0D",
-            "invert_logo":"0",
-        }
+        BG          = "#1A1A1A"
+        BG_MID      = "#202020"
+        BG_CARD     = "#161616"
+        BG_ELEV     = "#252525"
+        FG          = "#F5F5F5"
+        FG2         = "#BCBCBC"
+        BORDER      = "#333333"
+        ORANGE      = "#E8941A"
+        ORANGE_GLOW = "rgba(232,148,26,0.22)"
+        ORANGE_DIM  = "rgba(232,148,26,0.12)"
+        RED         = "#D45C5C"
+        GREEN       = "#4DC98A"
+        SHADOW      = "0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 30px rgba(0,0,0,0.45)"
+        INPUT_BG    = "#202020"
+        SIDEBAR_BG  = "#202020"
+        SCROLL_TR   = "#161616"
+        SCROLL_TH   = "#333333"
+        AMBIENT     = "radial-gradient(1200px 600px at 80% -10%, rgba(232,148,26,0.07) 0%, transparent 60%), radial-gradient(900px 500px at -10% 110%, rgba(122,180,224,0.05) 0%, transparent 60%)"
+        HEADER_BG   = "#161616"
+        HEADER_BORD = "#333333"
+        INVERT      = "1"
     else:
-        tokens = {
-            "bg":         "#F7F4EF",
-            "sidebar_bg": "#FFFFFF",
-            "card_bg":    "#FFFFFF",
-            "card_bg2":   "#FDF9F3",
-            "input_bg":   "#FFFFFF",
-            "border":     "#E2D9CC",
-            "border2":    "#EDE6DC",
-            "text":       "#1A1009",
-            "text2":      "#4A3B2A",
-            "muted":      "#7A6A55",
-            "muted2":     "#B0A090",
-            "header_text":"#1A1009",
-            "divider":    "#E8DDD0",
-            "tag_bg":     "#FDF1DE",
-            "shadow":     "rgba(90,60,10,0.12)",
-            "glow":       "rgba(245,166,35,0.25)",
-            "metric_bg":  "#FFFFFF",
-            "scroll_track":"#EDE6DC",
-            "scroll_thumb":"#D4C4A8",
-            "badge_text": "#FFFFFF",
-            "invert_logo":"0",
-        }
+        BG          = "#FAFAF8"
+        BG_MID      = "#F2EFE9"
+        BG_CARD     = "#FFFFFF"
+        BG_ELEV     = "#EDEAE4"
+        FG          = "#1A1009"
+        FG2         = "#6B5A45"
+        BORDER      = "#E0D8CC"
+        ORANGE      = "#C47208"
+        ORANGE_GLOW = "rgba(196,114,8,0.18)"
+        ORANGE_DIM  = "rgba(196,114,8,0.08)"
+        RED         = "#B51C00"
+        GREEN       = "#1A6B30"
+        SHADOW      = "0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 16px rgba(90,60,10,0.10)"
+        INPUT_BG    = "#FFFFFF"
+        SIDEBAR_BG  = "#FFFFFF"
+        SCROLL_TR   = "#EDE6DC"
+        SCROLL_TH   = "#D4C4A8"
+        AMBIENT     = "none"
+        HEADER_BG   = "#FFFFFF"
+        HEADER_BORD = "#E0D8CC"
+        INVERT      = "0"
 
-    t = tokens
     st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-/* ── Base */
-html, body, [class*="css"], .stApp, .main, section.main {{
-    font-family: 'Space Grotesk', sans-serif !important;
-    background-color: {t["bg"]} !important;
-    color: {t["text"]} !important;
+/* BASE */
+html, body, [class*="css"], .stApp {{
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background-color: {BG} !important;
+    color: {FG} !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: optimizeLegibility !important;
 }}
+.stApp {{
+    background-image: {AMBIENT} !important;
+    background-attachment: fixed !important;
+}}
+::selection {{ background: {ORANGE_DIM} !important; color: {FG} !important; }}
 
-/* ── Header bar */
+/* HEADER */
 header[data-testid="stHeader"] {{
-    background: linear-gradient(90deg, #F5A623 0%, #E8941A 100%) !important;
-    border-bottom: 2px solid #D4840E !important;
-    box-shadow: 0 2px 12px {t["shadow"]} !important;
+    background-color: {HEADER_BG} !important;
+    border-bottom: 1px solid {HEADER_BORD} !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
 }}
-header[data-testid="stHeader"] * {{ color: {t["header_text"]} !important; }}
+header[data-testid="stHeader"] * {{ color: {FG} !important; }}
 
-/* ── Sidebar */
+/* SIDEBAR */
 [data-testid="stSidebar"] {{
-    background-color: {t["sidebar_bg"]} !important;
-    border-right: 1px solid {t["border"]} !important;
-    box-shadow: 2px 0 16px {t["shadow"]} !important;
+    background-color: {SIDEBAR_BG} !important;
+    border-right: 1px solid {BORDER} !important;
+    box-shadow: none !important;
 }}
-[data-testid="stSidebar"] * {{ color: {t["text"]} !important; }}
-[data-testid="stSidebar"] .stMarkdown p,
-[data-testid="stSidebar"] label {{
-    color: {t["text2"]} !important;
-    font-size: 0.82rem !important;
+[data-testid="stSidebar"] > div {{ padding-top: 0 !important; }}
+[data-testid="stSidebar"] * {{ color: {FG} !important; }}
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .stMarkdown p {{
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.76rem !important;
+    letter-spacing: 0.12em !important;
+    color: {FG2} !important;
 }}
+[data-testid="stSidebar"] hr {{ border-color: {BORDER} !important; margin: 0.5rem 0 !important; }}
+[data-testid="stSidebar"] img {{ filter: invert({INVERT}) opacity(0.9) !important; }}
 
-/* ── Sidebar section labels */
-[data-testid="stSidebar"] hr {{
-    border-color: {t["border"]} !important;
-    margin: 0.6rem 0 !important;
-}}
-
-/* ── Buttons */
+/* BUTTONS — ghost border style matching Lovable */
 div.stButton > button {{
     background-color: transparent !important;
-    color: #F5A623 !important;
-    border: 1.5px solid #F5A623 !important;
+    color: {FG2} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 6px !important;
     font-family: 'IBM Plex Mono', monospace !important;
     font-size: 0.72rem !important;
-    letter-spacing: 0.1em !important;
+    letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
-    padding: 0.45rem 1rem !important;
-    font-weight: 600 !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 1px 4px {t["shadow"]} !important;
+    font-weight: 500 !important;
+    padding: 0.35rem 0.85rem !important;
+    transition: border-color 0.18s, color 0.18s !important;
+    box-shadow: none !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    line-height: 1 !important;
 }}
 div.stButton > button:hover {{
-    background: linear-gradient(135deg, #F5A623, #E8941A) !important;
-    color: {t["badge_text"]} !important;
-    box-shadow: 0 4px 16px {t["glow"]} !important;
-    transform: translateY(-1px) !important;
-    border-color: transparent !important;
+    border-color: {ORANGE} !important;
+    color: {ORANGE} !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
 }}
-div.stButton > button:active {{
-    transform: translateY(0px) !important;
-    box-shadow: 0 1px 6px {t["glow"]} !important;
-}}
-
-/* ── Primary / CTA button (detect signals) */
-div.stButton > button[kind="primary"],
+/* Wide CTA run button */
 div.stButton > button[data-testid="baseButton-primary"] {{
-    background: linear-gradient(135deg, #F5A623 0%, #E8941A 100%) !important;
-    color: {t["badge_text"]} !important;
+    background-color: {ORANGE} !important;
+    color: #000000 !important;
     border: none !important;
     font-weight: 700 !important;
-    letter-spacing: 0.12em !important;
+    letter-spacing: 0.16em !important;
+    height: 44px !important;
+    min-height: 44px !important;
 }}
-div.stButton > button[kind="primary"]:hover {{
-    background: linear-gradient(135deg, #FFBE4D 0%, #F5A623 100%) !important;
-    box-shadow: 0 6px 20px {t["glow"]} !important;
+div.stButton > button[data-testid="baseButton-primary"]:hover {{
+    box-shadow: 0 0 0 1px {ORANGE_GLOW}, 0 8px 24px {ORANGE_GLOW} !important;
+    background-color: {ORANGE} !important;
+    color: #000000 !important;
+}}
+div.stButton > button:disabled {{
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
 }}
 
-/* ── Select / Input / Textarea */
+/* INPUTS */
 div[data-baseweb="select"] > div {{
-    background-color: {t["input_bg"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 6px !important;
-    color: {t["text"]} !important;
+    color: {FG} !important;
+    font-size: 0.8rem !important;
+    min-height: 36px !important;
     transition: border-color 0.18s !important;
 }}
 div[data-baseweb="select"] > div:focus-within {{
-    border-color: #F5A623 !important;
-    box-shadow: 0 0 0 2px {t["glow"]} !important;
+    border-color: {ORANGE} !important;
+    outline: 2px solid {ORANGE_DIM} !important;
+    outline-offset: 2px !important;
 }}
 div[data-baseweb="input"] > div {{
-    background-color: {t["input_bg"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 6px !important;
-    color: {t["text"]} !important;
+    min-height: 36px !important;
+    color: {FG} !important;
+    transition: border-color 0.18s !important;
 }}
 div[data-baseweb="input"] > div:focus-within {{
-    border-color: #F5A623 !important;
-    box-shadow: 0 0 0 2px {t["glow"]} !important;
+    border-color: {ORANGE} !important;
+    outline: 2px solid {ORANGE_DIM} !important;
+    outline-offset: 2px !important;
 }}
 input, input[type="text"], input[type="password"] {{
-    background-color: {t["input_bg"]} !important;
-    color: {t["text"]} !important;
+    background-color: {BG_CARD} !important;
+    color: {FG} !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.78rem !important;
 }}
+input::placeholder {{ color: {FG2} !important; opacity: 1 !important; }}
 textarea {{
-    background-color: {t["input_bg"]} !important;
-    color: {t["text"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    color: {FG} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 6px !important;
     font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.82rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.6 !important;
     transition: border-color 0.18s !important;
 }}
 textarea:focus {{
-    border-color: #F5A623 !important;
-    box-shadow: 0 0 0 2px {t["glow"]} !important;
-    outline: none !important;
+    border-color: {ORANGE} !important;
+    outline: 2px solid {ORANGE_DIM} !important;
+    outline-offset: 2px !important;
 }}
-
-/* ── Selectbox dropdown list */
+textarea::placeholder {{ color: {FG2} !important; opacity: 1 !important; }}
 ul[data-baseweb="menu"] {{
-    background-color: {t["card_bg"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 8px !important;
-    box-shadow: 0 8px 24px {t["shadow"]} !important;
+    box-shadow: {SHADOW} !important;
+    padding: 4px !important;
 }}
 li[role="option"] {{
-    color: {t["text"]} !important;
-    font-size: 0.82rem !important;
+    color: {FG} !important; font-size: 0.8rem !important; border-radius: 4px !important;
 }}
 li[role="option"]:hover, li[aria-selected="true"] {{
-    background-color: {t["tag_bg"]} !important;
-    color: #F5A623 !important;
+    background-color: {ORANGE_DIM} !important;
+    color: {ORANGE} !important;
 }}
 
-/* ── Tabs */
-div[data-testid="stTabs"] {{
-    border-bottom: 1px solid {t["border"]} !important;
-}}
+/* TABS */
+div[data-testid="stTabs"] > div:first-child {{ border-bottom: 1px solid {BORDER} !important; }}
 div[data-testid="stTabs"] button {{
     font-family: 'IBM Plex Mono', monospace !important;
     font-size: 0.72rem !important;
     letter-spacing: 0.12em !important;
-    color: {t["muted"]} !important;
-    border-radius: 6px 6px 0 0 !important;
-    padding: 0.5rem 1.2rem !important;
-    transition: color 0.18s !important;
     text-transform: uppercase !important;
+    color: {FG2} !important;
+    border-radius: 6px 6px 0 0 !important;
+    padding: 0.55rem 1.1rem !important;
+    border: none !important;
+    background: transparent !important;
+    transition: color 0.18s, background-color 0.18s !important;
+    font-weight: 500 !important;
 }}
 div[data-testid="stTabs"] button:hover {{
-    color: #F5A623 !important;
-    background-color: {t["tag_bg"]} !important;
+    color: {FG} !important;
+    background-color: {ORANGE_DIM} !important;
 }}
 div[data-testid="stTabs"] button[aria-selected="true"] {{
-    color: #F5A623 !important;
-    border-bottom: 2px solid #F5A623 !important;
+    color: {ORANGE} !important;
+    border-bottom: 2px solid {ORANGE} !important;
     font-weight: 700 !important;
+    background-color: transparent !important;
 }}
 
-/* ── Metric cards */
+/* METRICS */
 div[data-testid="stMetric"] {{
-    background-color: {t["metric_bg"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
+    border-top: 2px solid {ORANGE} !important;
     border-radius: 10px !important;
-    padding: 0.9rem 1rem !important;
-    border-top: 3px solid #F5A623 !important;
-    box-shadow: 0 2px 8px {t["shadow"]} !important;
+    padding: 1rem 1.1rem !important;
+    box-shadow: {SHADOW} !important;
     transition: box-shadow 0.2s !important;
 }}
 div[data-testid="stMetric"]:hover {{
-    box-shadow: 0 4px 16px {t["glow"]} !important;
+    box-shadow: 0 0 0 1px {ORANGE_GLOW}, 0 8px 24px {ORANGE_GLOW} !important;
 }}
 div[data-testid="stMetric"] label {{
     font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.62rem !important;
-    letter-spacing: 0.16em !important;
-    color: {t["muted"]} !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.18em !important;
     text-transform: uppercase !important;
+    color: {FG2} !important;
+    font-weight: 500 !important;
 }}
 div[data-testid="stMetric"] div[data-testid="stMetricValue"] {{
     font-family: 'Space Grotesk', sans-serif !important;
-    font-size: 1.8rem !important;
+    font-size: 2rem !important;
     font-weight: 700 !important;
-    color: #F5A623 !important;
+    color: {ORANGE} !important;
     line-height: 1.1 !important;
+    letter-spacing: -0.01em !important;
 }}
-div[data-testid="stMetric"] div[data-testid="stMetricDelta"] {{
+div[data-testid="stMetric"] div[data-testid="stMetricDelta"] > div {{
     font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.68rem !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.1em !important;
 }}
 
-/* ── Expander */
+/* EXPANDER */
 details {{
-    background-color: {t["card_bg2"]} !important;
-    border: 1px solid {t["border"]} !important;
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 8px !important;
-    padding: 0.2rem 0.5rem !important;
+    padding: 0.3rem 0.6rem !important;
+    box-shadow: {SHADOW} !important;
 }}
 details summary {{
-    color: #F5A623 !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.08em !important;
+    color: {ORANGE} !important;
     font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.12em !important;
     font-weight: 600 !important;
+    text-transform: uppercase !important;
     cursor: pointer !important;
-    padding: 0.4rem 0 !important;
+    padding: 0.45rem 0 !important;
 }}
-details summary:hover {{ opacity: 0.8 !important; }}
+details summary:hover {{ opacity: 0.75 !important; }}
 
-/* ── Radio buttons */
-div[data-testid="stRadio"] label {{
-    color: {t["text2"]} !important;
-    font-size: 0.82rem !important;
-    transition: color 0.15s !important;
-}}
-div[data-testid="stRadio"] label:hover {{ color: #F5A623 !important; }}
-
-/* ── File uploader */
-[data-testid="stFileUploader"] {{
-    background-color: {t["card_bg2"]} !important;
-    border: 1.5px dashed {t["border"]} !important;
+/* FILE UPLOADER */
+[data-testid="stFileUploader"] section {{
+    background-color: {BG_CARD} !important;
+    border: 1px dashed {BORDER} !important;
     border-radius: 8px !important;
     transition: border-color 0.2s !important;
 }}
-[data-testid="stFileUploader"]:hover {{
-    border-color: #F5A623 !important;
+[data-testid="stFileUploader"] section:hover {{ border-color: {ORANGE} !important; }}
+[data-testid="stFileUploader"] label {{
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: {FG2} !important;
 }}
 
-/* ── Chat input */
-[data-testid="stChatInput"] > div {{
-    background-color: {t["input_bg"]} !important;
-    border: 1px solid {t["border"]} !important;
+/* CHAT INPUT */
+[data-testid="stChatInput"] {{
+    background-color: {BG_MID} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 8px !important;
 }}
-[data-testid="stChatInput"] > div:focus-within {{
-    border-color: #F5A623 !important;
-    box-shadow: 0 0 0 2px {t["glow"]} !important;
+[data-testid="stChatInput"]:focus-within {{ border-color: {ORANGE} !important; }}
+[data-testid="stChatInput"] textarea {{
+    background-color: {BG_MID} !important;
+    color: {FG} !important;
+    font-size: 0.88rem !important;
+    border: none !important;
+}}
+[data-testid="stChatInput"] button {{
+    background-color: {ORANGE} !important;
+    color: #000 !important;
+    border-radius: 6px !important;
+    border: none !important;
 }}
 
-/* ── Alert / info boxes */
+/* ALERTS */
 div[data-testid="stAlert"] {{
+    background-color: {BG_CARD} !important;
+    border: 1px solid {BORDER} !important;
+    border-left: 3px solid {ORANGE} !important;
     border-radius: 8px !important;
-    border-left: 4px solid #F5A623 !important;
     font-size: 0.82rem !important;
+    box-shadow: {SHADOW} !important;
+    color: {FG} !important;
 }}
 
-/* ── Download button */
+/* DOWNLOAD BUTTON */
 div.stDownloadButton > button {{
     background: transparent !important;
-    color: #F5A623 !important;
-    border: 1px solid {t["border"]} !important;
-    font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.7rem !important;
-    letter-spacing: 0.08em !important;
+    color: {FG2} !important;
+    border: 1px solid {BORDER} !important;
     border-radius: 6px !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
+    height: 32px !important;
+    transition: border-color 0.18s, color 0.18s !important;
 }}
 div.stDownloadButton > button:hover {{
-    border-color: #F5A623 !important;
-    background-color: {t["tag_bg"]} !important;
+    border-color: {ORANGE} !important;
+    color: {ORANGE} !important;
+    background: transparent !important;
 }}
 
-/* ── Scrollbar */
-::-webkit-scrollbar {{ width: 5px; height: 5px; }}
-::-webkit-scrollbar-track {{ background: {t["scroll_track"]}; border-radius: 3px; }}
-::-webkit-scrollbar-thumb {{ background: {t["scroll_thumb"]}; border-radius: 3px; }}
-::-webkit-scrollbar-thumb:hover {{ background: #F5A623; }}
-
-/* ── Smooth transitions on theme switch */
-*, *::before, *::after {{
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease !important;
+/* RADIO */
+div[data-testid="stRadio"] label {{
+    font-size: 0.82rem !important;
+    color: {FG2} !important;
+    transition: color 0.15s !important;
 }}
+div[data-testid="stRadio"] label:hover {{ color: {FG} !important; }}
 
-/* ── Main content padding */
+/* LAYOUT */
 .block-container {{
-    padding-top: 1.5rem !important;
+    padding-top: 1.2rem !important;
     padding-bottom: 2rem !important;
-    max-width: 1400px !important;
+    max-width: 1440px !important;
 }}
+section[data-testid="stSidebar"] > div:first-child {{ padding-top: 0.5rem !important; }}
+footer {{ display: none !important; }}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {{ width: 4px; height: 4px; }}
+::-webkit-scrollbar-track {{ background: {SCROLL_TR}; }}
+::-webkit-scrollbar-thumb {{ background: {SCROLL_TH}; border-radius: 2px; }}
+::-webkit-scrollbar-thumb:hover {{ background: {ORANGE}; }}
+
+/* FOCUS */
+:focus-visible {{
+    outline: 2px solid {ORANGE} !important;
+    outline-offset: 2px !important;
+    border-radius: 4px !important;
+}}
+
+/* TRANSITIONS */
+*, *::before, *::after {{
+    transition: background-color 0.22s ease, border-color 0.22s ease, color 0.15s ease !important;
+}}
+
+/* ANIMATIONS */
+@keyframes pulse-dot {{ 0%,100% {{ opacity:1; }} 50% {{ opacity:0.35; }} }}
+.pulse {{ animation: pulse-dot 1.6s ease-in-out infinite; }}
 </style>
 """, unsafe_allow_html=True)
 
-
-# ─────────────────────────────────────────────────────
-# THEME VARIABLE HELPER
-# ─────────────────────────────────────────────────────
 def tv() -> dict:
-    """Return current theme token dict for inline HTML use."""
+    """Return current theme token dict — exact Lovable palette."""
     dark = st.session_state.get("theme_dark", True)
     if dark:
         return {
-            "bg":        "#0D0D0D", "sidebar":  "#111111", "card":    "#141414",
-            "card2":     "#0F0F0F", "input":    "#1A1A1A", "border":  "#2A2A2A",
-            "border2":   "#1E1E1E", "text":     "#E8E8E8", "text2":   "#AAAAAA",
-            "muted":     "#888888", "muted2":   "#555555", "tag":     "#1C1C1C",
-            "shadow":    "rgba(0,0,0,0.5)",
-            "acc":       "#F5A623", "acc_text": "#000000",
-            "green":     "#30D158", "red":      "#FF3B30",
-            "badge_fg":  "#000000",
-            # KPI type colours — vivid on dark
-            "c_trend":   "#F5A623", "c_sent":   "#30D158", "c_vel":   "#FF9F0A",
-            "c_heat":    "#FF3B30", "c_rank":   "#BF5AF2", "c_evt":   "#32ADE6",
-            "c_price":   "#64D2FF",
-            # signal card backgrounds
-            "sig_bg":    "#0F0F0F", "sig_ext":  "#1A0808",
+            "bg":       "#1A1A1A", "sidebar":  "#202020", "card":   "#161616",
+            "card2":    "#131313", "input":    "#202020", "border": "#333333",
+            "border2":  "#2A2A2A", "text":     "#F5F5F5", "text2":  "#BCBCBC",
+            "muted":    "#888888", "muted2":   "#555555", "tag":    "#1E1E1E",
+            "shadow":   "rgba(0,0,0,0.45)",
+            "acc":      "#E8941A", "acc_text": "#000000",
+            "green":    "#4DC98A", "red":      "#D45C5C",
+            "badge_fg": "#000000",
+            "c_trend":  "#E8941A", "c_sent":   "#4DC98A", "c_vel":  "#F0A830",
+            "c_heat":   "#D45C5C", "c_rank":   "#B07FD8", "c_evt":  "#7AB4E0",
+            "c_price":  "#7AB4E0",
+            "sig_bg":   "#161616", "sig_ext":  "#1C1010",
         }
     else:
         return {
-            "bg":        "#F7F4EF", "sidebar":  "#FFFFFF", "card":    "#FFFFFF",
-            "card2":     "#FDF9F3", "input":    "#FFFFFF", "border":  "#E2D9CC",
-            "border2":   "#EDE6DC", "text":     "#1A1009", "text2":   "#4A3B2A",
-            "muted":     "#6B5A45", "muted2":   "#9A8A78", "tag":     "#FDF1DE",
-            "shadow":    "rgba(90,60,10,0.10)",
-            "acc":       "#C47208", "acc_text": "#FFFFFF",
-            "green":     "#1A6B30", "red":      "#B51C00",
-            "badge_fg":  "#FFFFFF",
-            # KPI type colours — darker/richer on light bg for legibility
-            "c_trend":   "#B05E00", "c_sent":   "#1A6B30", "c_vel":   "#9A5000",
-            "c_heat":    "#B51C00", "c_rank":   "#6B2EA0", "c_evt":   "#0066AA",
-            "c_price":   "#005C8A",
-            # signal card backgrounds — warm tinted on light
-            "sig_bg":    "#FAFAF8", "sig_ext":  "#FFF5F3",
+            "bg":       "#FAFAF8", "sidebar":  "#FFFFFF", "card":   "#FFFFFF",
+            "card2":    "#F5F2EC", "input":    "#FFFFFF", "border": "#E0D8CC",
+            "border2":  "#EDE6DC", "text":     "#1A1009", "text2":  "#6B5A45",
+            "muted":    "#7A6A55", "muted2":   "#9A8A78", "tag":    "#FDF1DE",
+            "shadow":   "rgba(90,60,10,0.08)",
+            "acc":      "#C47208", "acc_text": "#FFFFFF",
+            "green":    "#1A6B30", "red":      "#B51C00",
+            "badge_fg": "#FFFFFF",
+            "c_trend":  "#B05E00", "c_sent":   "#1A6B30", "c_vel":  "#9A5000",
+            "c_heat":   "#B51C00", "c_rank":   "#6B2EA0", "c_evt":  "#0066AA",
+            "c_price":  "#005C8A",
+            "sig_bg":   "#FAFAF8", "sig_ext":  "#FFF5F3",
         }
 
 
